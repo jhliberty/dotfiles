@@ -115,6 +115,7 @@ map <Leader>i :bprevious<CR>
 map <Leader>o :bnext<CR>
 map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
+map <Leader>bd :bd<CR>
 
 nnoremap <leader>ev :vsplit /Users/vasconcelloslf/.vim/.vimrc<cr>
 nnoremap <leader>rv :source /Users/vasconcelloslf/.vim/.vimrc<cr>
