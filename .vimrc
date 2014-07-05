@@ -72,6 +72,8 @@ Bundle 'thoughtbot/vim-rspec'
 Bundle 'szw/vim-g'
 Bundle 'tpope/vim-rsi'
 
+Bundle 'godlygeek/tabular.git'
+
 " ------------------------------------------------------------------------------
 " Binds
 " ------------------------------------------------------------------------------
@@ -123,8 +125,8 @@ map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 map <Leader>bd :bd<CR>
 
-nnoremap <leader>ev :vsplit /Users/luisvasconcellos/Dotfiles/.vimrc<cr>
-nnoremap <leader>rv :source /Users/luisvasconcellos/Dotfiles/.vimrc<cr>
+nnoremap <leader>ev :vsplit /Users/vasconcelloslf/Dotfiles/.vimrc<cr>
+nnoremap <leader>rv :source /Users/vasconcelloslf/Dotfiles/.vimrc<cr>
 
 " move up/down the selected lines
 xmap <C-k> :mo'<-- <CR> gv
