@@ -116,7 +116,6 @@ map <Leader>gc :Gcommit -v -q<CR>
 map <Leader>gd :Gdiff<CR>
 map <Leader>gb :Gblame<CR>
 
-
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprevious<CR>
 
@@ -136,6 +135,9 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
 map <C-c> <Esc>
+
+nmap <Leader>sa :sba<CR>
+nmap <Leader>va :vert sba<CR>
 
 " ------------------------------------------------------------------------------
 " Search and Replace
