@@ -3,7 +3,6 @@
 " General Settings
 " ------------------------------------------------------------------------------
 
-set bdir-=.
 set bdir+=/tmp
 set dir-=.
 set dir+=/tmp
@@ -71,6 +70,7 @@ Bundle 'myusuf3/numbers.vim'
 Bundle 'bling/vim-airline'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'szw/vim-g'
+Bundle 'tpope/vim-rsi'
 
 " ------------------------------------------------------------------------------
 " Binds
@@ -88,7 +88,6 @@ imap kj <Esc>:w<CR>
 imap KJ <Esc>:w<CR>
 imap <Tab> <Space><Space>
 
-nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<cr>
 nmap <leader>w :w<CR>
 nmap <leader>t :CtrlP<CR>
@@ -101,6 +100,8 @@ nmap zM zMz
 
 nnoremap <C-W>O :MaximizerToggle<CR>
 nnoremap <C-W>o :MaximizerToggle<CR>
+nmap <C-W>t :NERDTreeToggle<CR>
+nmap <C-W>T :NERDTreeToggle<CR>
 
 map <Leader>r :call RunNearestSpec()<CR>
 map <Leader>R :call RunCurrentSpecFile()<CR>
@@ -117,8 +118,8 @@ map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 map <Leader>bd :bd<CR>
 
-nnoremap <leader>ev :vsplit /Users/vasconcelloslf/.vim/.vimrc<cr>
-nnoremap <leader>rv :source /Users/vasconcelloslf/.vim/.vimrc<cr>
+nnoremap <leader>ev :vsplit /Users/luisvasconcellos/Dotfiles/.vimrc<cr>
+nnoremap <leader>rv :source /Users/luisvasconcellos/Dotfiles/.vimrc<cr>
 
 " move up/down the selected lines
 xmap <C-k> :mo'<-- <CR> gv
