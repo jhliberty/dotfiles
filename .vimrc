@@ -76,6 +76,7 @@ Bundle 'tpope/vim-rsi'
 " Binds
 " ------------------------------------------------------------------------------
 
+
 " ident the selected lines
 vmap <Tab> >gv
 vmap <S-Tab> <gv
@@ -90,8 +91,11 @@ imap <Tab> <Space><Space>
 
 nmap <leader>nf :NERDTreeFind<cr>
 nmap <leader>w :w<CR>
+
+let g:ctrlp_map = '<Leader>t'
 nmap <leader>t :CtrlP<CR>
 nmap <leader>T :CtrlPBuffer<CR>
+
 nmap <leader>f :Ack --ignore-dir=log<space>
 nmap <leader>rp :%s/
 nmap [p :set paste<CR>
@@ -112,8 +116,10 @@ map <Leader>gc :Gcommit -v -q<CR>
 map <Leader>gd :Gdiff<CR>
 map <Leader>gb :Gblame<CR>
 
-map <Leader>i :bprevious<CR>
-map <Leader>o :bnext<CR>
+
+nmap <C-n> :bnext<CR>
+nmap <C-p> :bprevious<CR>
+
 map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 map <Leader>bd :bd<CR>
@@ -128,6 +134,8 @@ xmap <C-j> :mo'>+ <CR> gv
 " smooth scrool
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+
+map <C-c> <Esc>
 
 " ------------------------------------------------------------------------------
 " Search and Replace
