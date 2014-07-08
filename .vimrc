@@ -60,10 +60,12 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-bundler'
 Bundle 'Townk/vim-autoclose'
 Bundle 'szw/vim-maximizer'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'gregsexton/gitv'
 
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'myusuf3/numbers.vim'
@@ -71,8 +73,6 @@ Bundle 'bling/vim-airline'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'szw/vim-g'
 Bundle 'tpope/vim-rsi'
-
-Bundle 'godlygeek/tabular.git'
 
 " ------------------------------------------------------------------------------
 " Binds
@@ -90,6 +90,9 @@ imap kJ <Esc>:w<CR>
 imap kj <Esc>:w<CR>
 imap KJ <Esc>:w<CR>
 imap <Tab> <Space><Space>
+
+nmap <C-w>t :NERDTreeToggle<CR>
+nmap <C-w>T :NERDTreeToggle<CR>
 
 nmap <leader>nf :NERDTreeFind<cr>
 nmap <leader>w :w<CR>
@@ -112,11 +115,12 @@ nmap <C-W>T :NERDTreeToggle<CR>
 map <Leader>r :call RunNearestSpec()<CR>
 map <Leader>R :call RunCurrentSpecFile()<CR>
 
-map <Leader>ga :Git add %:p<CR><CR>
 map <Leader>gs :Gstatus<CR>
-map <Leader>gc :Gcommit -v -q<CR>
-map <Leader>gd :Gdiff<CR>
+map <Leader>gc :Gcommit<CR>
 map <Leader>gb :Gblame<CR>
+map <Leader>gv :Gitv<CR>
+map <Leader>gr :GitGutterRevertHunk<CR>
+map <Leader>go :Google
 
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprevious<CR>
