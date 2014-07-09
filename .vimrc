@@ -91,9 +91,6 @@ imap kj <Esc>:w<CR>
 imap KJ <Esc>:w<CR>
 imap <Tab> <Space><Space>
 
-nmap <C-w>t :NERDTreeToggle<CR>
-nmap <C-w>T :NERDTreeToggle<CR>
-
 nmap <leader>nf :NERDTreeFind<cr>
 nmap <leader>w :w<CR>
 
@@ -107,10 +104,11 @@ nmap [p :set paste<CR>
 nmap ]p :set nopaste<CR>
 nmap zM zMz
 
-nnoremap <C-W>O :MaximizerToggle<CR>
-nnoremap <C-W>o :MaximizerToggle<CR>
-nmap <C-W>t :NERDTreeToggle<CR>
-nmap <C-W>T :NERDTreeToggle<CR>
+nnoremap <Leader>o :MaximizerToggle<CR>
+vnoremap <Leader>o :MaximizerToggle<CR>gv
+
+nmap <C-w>t :NERDTreeToggle<CR>
+nmap <C-w>T :NERDTreeToggle<CR>
 
 map <Leader>r :call RunNearestSpec()<CR>
 map <Leader>R :call RunCurrentSpecFile()<CR>
@@ -137,8 +135,8 @@ xmap <C-k> :mo'<-- <CR> gv
 xmap <C-j> :mo'>+ <CR> gv
 
 " smooth scrool
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
 map <C-c> <Esc>
 
