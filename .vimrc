@@ -56,92 +56,115 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'mileszs/ack.vim'
 Bundle 'kien/ctrlp.vim'
 
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-bundler'
-Bundle 'Townk/vim-autoclose'
-Bundle 'szw/vim-maximizer'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-commentary'
+Bundle 'Townk/vim-autoclose'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-bundler'
+Bundle 'szw/vim-maximizer'
 Bundle 'gregsexton/gitv'
 
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'thoughtbot/vim-rspec'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'bling/vim-airline'
-Bundle 'thoughtbot/vim-rspec'
-Bundle 'szw/vim-g'
 Bundle 'tpope/vim-rsi'
+Bundle 'szw/vim-g'
 
 " ------------------------------------------------------------------------------
-" Binds
+" Mappings
 " ------------------------------------------------------------------------------
 
+" Basic mappings
+map <C-c> <Esc>
 
-" ident the selected lines
+noremap <leader>w :w<CR>
+noremap <leader>q :q<cr>
+noremap <leader>rp :%s/
+
+" Remap ctrlp and ctrlbuffer
+let g:ctrlp_map = '<Leader>t'
+
+nmap <leader>t :CtrlP<CR>
+nmap <leader>T :CtrlPBuffer<CR>
+
+" Find with ack ignoring .log files
+nmap <leader>f :Ack --ignore-dir=log<Space>
+
+" Indent with tab and shift+tab the selected lines
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" Exit insert mode with jk (smash exit)
 imap jk <Esc>:w<CR>
 imap JK <Esc>:w<CR>
 imap jK <Esc>:w<CR>
 imap kJ <Esc>:w<CR>
 imap kj <Esc>:w<CR>
 imap KJ <Esc>:w<CR>
-imap <Tab> <Space><Space>
 
+" Go to the current file in the nerd tree
 nmap <leader>nf :NERDTreeFind<cr>
-nmap <leader>w :w<CR>
 
-let g:ctrlp_map = '<Leader>t'
-nmap <leader>t :CtrlP<CR>
-nmap <leader>T :CtrlPBuffer<CR>
-
-nmap <leader>f :Ack --ignore-dir=log<space>
-nmap <leader>rp :%s/
+" Paste mode
 nmap [p :set paste<CR>
 nmap ]p :set nopaste<CR>
+
 nmap zM zMz
 
 nnoremap <Leader>o :MaximizerToggle<CR>
-vnoremap <Leader>o :MaximizerToggle<CR>gv
 
+" Open nerd tree like with <C-w>t
 nmap <C-w>t :NERDTreeToggle<CR>
-nmap <C-w>T :NERDTreeToggle<CR>
 
+" Run the tests in a spec file
 map <Leader>r :call RunNearestSpec()<CR>
 map <Leader>R :call RunCurrentSpecFile()<CR>
 
+" Git mappings (fugitive, gitgutter and gitv)
 map <Leader>gs :Gstatus<CR>
 map <Leader>gc :Gcommit<CR>
 map <Leader>gb :Gblame<CR>
-map <Leader>gv :Gitv<CR>
+map <Leader>gv :Gitv --all<CR>
 map <Leader>gr :GitGutterRevertHunk<CR>
-map <Leader>go :Google
 
+" Tab manipulation mappings
+noremap <S-j> gt
+noremap <S-k> gT
+
+" Buffer manipulation mappings
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprevious<CR>
-
 map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 map <Leader>bd :bd<CR>
 
+" Open all buffers vertical splitted
+nmap <Leader>sa :sba<CR>
+
+" Open all buffers horizontal splitted
+nmap <Leader>va :vert sba<CR>
+
+" Reload and edit .vimrc
 nnoremap <leader>ev :vsplit /Users/vasconcelloslf/Dotfiles/.vimrc<cr>
 nnoremap <leader>rv :source /Users/vasconcelloslf/Dotfiles/.vimrc<cr>
 
-" move up/down the selected lines
-xmap <C-k> :mo'<-- <CR> gv
-xmap <C-j> :mo'>+ <CR> gv
+" Move up/down the selected lines
+vnoremap <C-k> :mo'<-- <CR> gv
+vnoremap <C-j> :mo'>+ <CR> gv
 
-" smooth scrool
+" Smooth scrool
 noremap <silent> <C-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <C-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
-map <C-c> <Esc>
+" Clone the current paragraph
+noremap cp yap<S-}>p
 
-nmap <Leader>sa :sba<CR>
-nmap <Leader>va :vert sba<CR>
+" Align the current paragprah
+noremap <leader>a =ip
 
 " ------------------------------------------------------------------------------
 " Search and Replace
@@ -208,7 +231,6 @@ endfunction
 
 " Close hidden buffers
 " -------------------
-
 function! DeleteInactiveBufs()
     "From tabpagebuflist() help, get a list of all buffers in all tabs
     let tablist = []
@@ -228,4 +250,5 @@ function! DeleteInactiveBufs()
     endfor
     echomsg nWipeouts . ' buffer(s) wiped out'
 endfunction
+
 command! Bdi :call DeleteInactiveBufs()
