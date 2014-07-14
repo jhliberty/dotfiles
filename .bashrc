@@ -14,7 +14,6 @@ set -o ignoreeof
 GIT_PROMPT_ONLY_IN_REPO=0
 
 source ~/Dotfiles/bash-git-prompt/gitprompt.sh
-source ~/Dotfiles/tmux_send_to_all.sh
 
 # RVM PATH
 export PATH="$PATH:$HOME/.rvm/bin"
