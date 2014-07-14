@@ -115,6 +115,7 @@ nmap ]p :set nopaste<CR>
 
 nmap zM zMz
 
+" Maximize a window
 nnoremap <Leader>o :MaximizerToggle<CR>
 
 " Open nerd tree like with <C-w>t
@@ -130,10 +131,6 @@ map <Leader>gc :Gcommit<CR>
 map <Leader>gb :Gblame<CR>
 map <Leader>gv :Gitv --all<CR>
 map <Leader>gr :GitGutterRevertHunk<CR>
-
-" Tab manipulation mappings
-noremap <S-j> gt
-noremap <S-k> gT
 
 " Buffer manipulation mappings
 nmap <C-n> :bnext<CR>

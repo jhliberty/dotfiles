@@ -1,30 +1,24 @@
-# ALIAS
+# ALIASES
+alias rm='rm -i'
+alias vimm='/usr/local/Cellar/vim/7.4.273/bin/vim'
+alias vim='/usr/local/Cellar/vim/7.4.273/bin/vim'
+alias vi='/usr/local/Cellar/vim/7.4.273/bin/vim'
 
-alias vi='/usr/local/Cellar/vim/7.3.923/bin/vim'
-alias vim='/usr/local/Cellar/vim/7.3.923/bin/vim'
+# DEFAULT EDITOR
+export EDITOR='/usr/local/Cellar/vim/7.4.273/bin/vim'
 
-alias mysql='/usr/local/mysql/bin/mysql'
-alias mysqldump='/usr/local/mysql/bin/mysqldump'
-alias mongo='mongod run --config /usr/local/etc/mongod.conf'
-alias elastic='elasticsearch -f -D es.config=/usr/local/Cellar/elasticsearch/0.20.5/config/elasticsearch.yml'
-alias git='/usr/local/Cellar/git/2.0.0/bin/git'
+# IGNORE CTRL D
+set -o ignoreeof
 
-# EDITOR
-export EDITOR='/usr/local/Cellar/vim/7.3.923/bin/vim'
-
-# RVM
-[[ -s "/Users/vasconcelloslf/.rvm/scripts/rvm" ]] && source "/Users/vasconcelloslf/.rvm/scripts/rvm"
-
-# GIT PROMPT
+# SHELL SCRIPTS
 GIT_PROMPT_ONLY_IN_REPO=0
-source ~/.bash-git-prompt/gitprompt.sh
 
-# ANDROID
-export PATH=${PATH}:/Users/vasconcelloslf/Development/Android/android-sdk/sdk/platform-tools:/Users/vasconcelloslf/Development/Android/android-sdk/sdk/tools
-export JAVA_HOME=$(/usr/libexec/java_home)
+source ~/Dotfiles/bash-git-prompt/gitprompt.sh
+source ~/Dotfiles/tmux_send_to_all.sh
 
-# PHONEGAP ANT
-export ANT_HOME="/Users/vasconcelloslf/Development/Android/android-sdk/eclipse/plugins/org.apache.ant_1.8.4.v201303080030"
-export PATH=$PATH:$ANT_HOME/bin
+# RVM PATH
+export PATH="$PATH:$HOME/.rvm/bin"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# hack to run vim-rspec with spring
+# mkdir .git/safe in the root of repositories you trust
+export PATH=".git/safe/../../bin:$PATH"
