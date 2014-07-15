@@ -1,11 +1,8 @@
 # ALIASES
 alias rm='rm -i'
-alias vimm='/usr/local/Cellar/vim/7.4.273/bin/vim'
-alias vim='/usr/local/Cellar/vim/7.4.273/bin/vim'
-alias vi='/usr/local/Cellar/vim/7.4.273/bin/vim'
 
 # DEFAULT EDITOR
-export EDITOR='/usr/local/Cellar/vim/7.4.273/bin/vim'
+export EDITOR='/usr/local/Cellar/vim/7.3.923/bin/vim'
 
 # IGNORE CTRL D
 set -o ignoreeof
@@ -21,3 +18,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # hack to run vim-rspec with spring
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
+
+# hack to make sure that homebrew is
+# consulted first when looking for bins
+export PATH=/usr/local/bin:$PATH
