@@ -2,7 +2,7 @@
 alias rm='rm -i'
 
 # DEFAULT EDITOR
-export EDITOR='/usr/local/Cellar/vim/7.3.923/bin/vim'
+export EDITOR='/usr/local/bin/vim'
 
 # IGNORE CTRL D
 set -o ignoreeof
