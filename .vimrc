@@ -83,7 +83,7 @@ map <C-c> <Esc>
 
 noremap <leader>w :w<CR>
 noremap <leader>q :q<cr>
-noremap <leader>rp :%s/
+nnoremap <leader>s :%s/
 
 " Remap ctrlp and ctrlbuffer
 let g:ctrlp_map = '<Leader>t'
@@ -163,6 +163,27 @@ noremap cp yap<S-}>p
 " Align the current paragprah
 noremap <leader>a =ip
 
+" Keep the search terms on the center of the screen
+nnoremap n nzz
+nnoremap N Nzz
+
+" Make * work for visual mode
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+
+" Lowercase the current word
+noremap <C-u> gUiw
+
+" Highlight the current line
+nnoremap vv ^vg_
+
 " ------------------------------------------------------------------------------
 " Search and Replace
 " ------------------------------------------------------------------------------
@@ -194,15 +215,68 @@ colorscheme railscasts " Load colorscheme
 
 set t_ut=
 
-" buffer tabs
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+" VIM Interesting Words
+function! HiInterestingWord(n)
+  " Save our location.
+  normal! mz
+
+  " Yank the current word into the z register.
+  normal! "zyiw
+
+  " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
+  let mid = 86750 + a:n
+
+  " Clear existing matches, but don't worry if they don't exist.
+  silent! call matchdelete(mid)
+
+  " Construct a literal pattern that has to match at boundaries.
+  let pat = '\V\<' . escape(@z, '\') . '\>'
+
+  " Actually match the words.
+  call matchadd("InterestingWord" . a:n, pat, 1, mid)
+
+  " Move back to our original location.
+  normal! `z
+endfunction
+
+nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+
+hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
+hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
+hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
+hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
+hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=222
 
 " ------------------------------------------------------------------------------
 " Misc
 " ------------------------------------------------------------------------------
 
+" buffer tabs
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Ignore some files with Ctrl+P
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" Resize all splits when the (tmux) panel is resized
+au VimResized * exe "normal! \<c-w>="
+
+" Open the file in the same line that the cursor were when the buffer was
+" closed
+augroup line_return
+  au!
+  au BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   execute 'normal! g`"zvzz' |
+    \ endif
+augroup END
+
 
 " Don't close window, when deleting a buffer
 " -----------------------------------------
