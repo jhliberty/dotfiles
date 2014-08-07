@@ -59,11 +59,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-commentary'
-Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-bundler'
 Bundle 'szw/vim-maximizer'
 Bundle 'gregsexton/gitv'
 
@@ -72,7 +70,11 @@ Bundle 'thoughtbot/vim-rspec'
 Bundle 'myusuf3/numbers.vim'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-rsi'
-Bundle 'szw/vim-g'
+
+Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'gorodinskiy/vim-coloresque'
+Bundle 'tpope/vim-haml'
 
 " ------------------------------------------------------------------------------
 " Mappings
