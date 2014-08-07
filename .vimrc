@@ -80,11 +80,13 @@ Bundle 'tpope/vim-haml'
 " Mappings
 " ------------------------------------------------------------------------------
 
+" Because fuck you, thats why.
+noremap q :q<cr>
+
 " Basic mappings
 map <C-c> <Esc>
 
 noremap <leader>w :w<CR>
-noremap <leader>q :q<cr>
 nnoremap <leader>s :%s/
 
 " Remap ctrlp and ctrlbuffer
@@ -185,6 +187,9 @@ noremap <C-u> gUiw
 
 " Highlight the current line
 nnoremap vv ^vg_
+
+" Position the cursor in the right place after typing {}
+imap {<cr> {<cr>}<c-o>O
 
 " ------------------------------------------------------------------------------
 " Search and Replace
