@@ -96,7 +96,8 @@ nmap <leader>t :CtrlP<CR>
 nmap <leader>T :CtrlPBuffer<CR>
 
 " Find with ack ignoring .log files
-nmap <leader>f :Ack --ignore-dir=log<Space>
+nmap <leader>ff :Ack --ignore-dir=log<Space>
+nmap <leader>fw :Ack <CR><Space>
 
 " Indent with tab and shift+tab the selected lines
 vmap <Tab> >gv
