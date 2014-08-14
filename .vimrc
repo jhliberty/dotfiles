@@ -84,8 +84,6 @@ Bundle 'tpope/vim-haml'
 noremap q :q<cr>
 
 " Basic mappings
-map <C-c> <Esc>
-
 noremap <leader>w :w<CR>
 nnoremap <leader>s :%s/
 
