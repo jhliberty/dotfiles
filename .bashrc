@@ -10,6 +10,7 @@ set -o ignoreeof
 # SHELL SCRIPTS
 GIT_PROMPT_ONLY_IN_REPO=0
 
+# BASH GIT PROMPT
 source ~/Dotfiles/bash-git-prompt/gitprompt.sh
 
 # RVM PATH
