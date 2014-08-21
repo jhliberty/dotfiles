@@ -18,6 +18,7 @@ set noswapfile
 set nomodeline
 set selection=inclusive                      " Select to the end of line.
 set pastetoggle=<F2>
+set textwidth=75                             " The format paragraph (gq) command uses this value to this what it have to do
 
 let mapleader = "\<Space>"
 

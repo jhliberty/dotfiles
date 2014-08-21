@@ -1,0 +1,15 @@
+[alias]
+  tree = log --oneline --decorate --all --graph
+[user]
+  name  = Luis Vasconcellos
+  email = vasconcelloslf@gmail.com
+[core]
+  quotepath = false
+[color]
+  ui = true
+[log]
+  decorate = full
+[push]
+  default = current
+[help]
+	autocorrect = 1
