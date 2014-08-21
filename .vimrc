@@ -139,6 +139,7 @@ nmap <C-n> :bnext<CR>
 nmap <C-p> :bprevious<CR>
 map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
+map <Leader>ff :call FoldFocus()<CR>
 map <Leader>bd :bd<CR>
 
 " Open all buffers vertical splitted
@@ -328,3 +329,38 @@ function! DeleteInactiveBufs()
 endfunction
 
 command! Bdi :call DeleteInactiveBufs()
+
+function! FoldFocus()
+  execute 'set modifiable'
+  execute 'normal yy'
+
+  let winnr = bufwinnr('^_output$')
+
+  if ( winnr >= 0 )
+      execute winnr . 'wincmd w'
+      execute 'normal ggdG'
+  else
+      new _output
+      setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  endif
+
+  execute 'normal p'
+  execute 'set nomodifiable'
+  execute 'set filetype=sql'
+endfunction
+
+function! OldFoldFocus()
+  execute 'yy'
+
+  execute 'normal p'
+
+  execute 'normal gg500<G'
+
+  execute 'set syntax=sql'
+
+  execute 'setlocal buftype=help'
+  execute 'setlocal bufhidden=hide'
+  execute 'noswapfile'
+
+  execute 'set nomodifiable'
+endfunction
