@@ -27,7 +27,7 @@ let mapleader = "\<Space>"
 " ------------------------------------------------------------------------------
 
 set foldmethod=indent
-set foldlevelstart=1
+set foldlevelstart=99
 
 " ------------------------------------------------------------------------------
 " WhiteSpacing
@@ -76,6 +76,8 @@ Bundle 'hail2u/vim-css3-syntax'
 Bundle 'gorodinskiy/vim-coloresque'
 Bundle 'tpope/vim-haml'
 
+Bundle 'vasconcelloslf/vim-foldfocus'
+
 " ------------------------------------------------------------------------------
 " Mappings
 " ------------------------------------------------------------------------------
@@ -94,8 +96,8 @@ nmap <leader>t :CtrlP<CR>
 nmap <leader>T :CtrlPBuffer<CR>
 
 " Find with ack ignoring .log files
-nmap <leader>ff :Ack --ignore-dir=log<Space>
-nmap <leader>fw :Ack <CR><Space>
+nmap <leader>ss :Ack --ignore-dir=log<Space>
+nmap <leader>sw :Ack <CR><Space>
 
 " Indent with tab and shift+tab the selected lines
 vmap <Tab> >gv
@@ -128,6 +130,10 @@ nmap <C-w>t :NERDTreeToggle<CR>
 map <Leader>r :call RunNearestSpec()<CR>
 map <Leader>R :call RunCurrentSpecFile()<CR>
 
+" Navigate through closed folders
+nnoremap <silent> <leader>zj :call NextClosedFold('j')<cr>
+nnoremap <silent> <leader>zk :call NextClosedFold('k')<cr>
+
 " Git mappings (fugitive, gitgutter and gitv)
 map <Leader>gs :Gstatus<CR>
 map <Leader>gc :Gcommit<CR>
@@ -140,7 +146,10 @@ nmap <C-n> :bnext<CR>
 nmap <C-p> :bprevious<CR>
 map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
-map <Leader>ff :call FoldFocus()<CR>
+
+map <Leader>ff :call FoldFocus('e')<CR>
+map <Leader>FF :call FoldFocus('vnew')<CR>
+
 map <Leader>bd :bd<CR>
 
 " Open all buffers vertical splitted
@@ -288,24 +297,24 @@ augroup END
 " Don't close window, when deleting a buffer
 " -----------------------------------------
 command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-   let l:currentBufNum = bufnr("%")
-   let l:alternateBufNum = bufnr("#")
+  function! <SID>BufcloseCloseIt()
+     let l:currentBufNum = bufnr("%")
+     let l:alternateBufNum = bufnr("#")
 
-   if buflisted(l:alternateBufNum)
-     buffer #
-   else
-     bnext
-   endif
+     if buflisted(l:alternateBufNum)
+       buffer #
+     else
+       bnext
+     endif
 
-   if bufnr("%") == l:currentBufNum
-     new
-   endif
+     if bufnr("%") == l:currentBufNum
+       new
+     endif
 
-   if buflisted(l:currentBufNum)
-     execute("bdelete! ".l:currentBufNum)
-   endif
-endfunction
+     if buflisted(l:currentBufNum)
+       execute("bdelete! ".l:currentBufNum)
+     endif
+  endfunction
 
 " Close hidden buffers
 " -------------------
@@ -331,37 +340,18 @@ endfunction
 
 command! Bdi :call DeleteInactiveBufs()
 
-function! FoldFocus()
-  execute 'set modifiable'
-  execute 'normal yy'
-
-  let winnr = bufwinnr('^_output$')
-
-  if ( winnr >= 0 )
-      execute winnr . 'wincmd w'
-      execute 'normal ggdG'
-  else
-      new _output
-      setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  endif
-
-  execute 'normal p'
-  execute 'set nomodifiable'
-  execute 'set filetype=sql'
-endfunction
-
-function! OldFoldFocus()
-  execute 'yy'
-
-  execute 'normal p'
-
-  execute 'normal gg500<G'
-
-  execute 'set syntax=sql'
-
-  execute 'setlocal buftype=help'
-  execute 'setlocal bufhidden=hide'
-  execute 'noswapfile'
-
-  execute 'set nomodifiable'
+" Navigate through vim closed folds
+" ---------------------------------
+function! NextClosedFold(dir)
+    let cmd = 'norm!z' . a:dir
+    let view = winsaveview()
+    let [l0, l, open] = [0, view.lnum, 1]
+    while l != l0 && open
+        exe cmd
+        let [l0, l] = [l, line('.')]
+        let open = foldclosed(l) < 0
+    endwhile
+    if open
+        call winrestview(view)
+    endif
 endfunction
