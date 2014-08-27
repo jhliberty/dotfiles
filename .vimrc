@@ -51,10 +51,10 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'dhruvasagar/vim-railscasts-theme'
+Bundle 'Shougo/vimproc.vim'
 
 Bundle 'scrooloose/nerdtree'
-Bundle 'mileszs/ack.vim'
-Bundle 'kien/ctrlp.vim'
+Bundle 'Shougo/unite.vim'
 
 Bundle 'terryma/vim-smooth-scroll'
 Bundle 'airblade/vim-gitgutter'
@@ -140,6 +140,8 @@ map <Leader>gc :Gcommit<CR>
 map <Leader>gb :Gblame<CR>
 map <Leader>gv :Gitv --all<CR>
 map <Leader>gr :GitGutterRevertHunk<CR>
+map <Leader>gn :GitGutterNextHunk<CR>
+map <Leader>gp :GitGutterPrevHunk<CR>
 
 " Buffer manipulation mappings
 nmap <C-n> :bnext<CR>
@@ -147,6 +149,7 @@ nmap <C-p> :bprevious<CR>
 map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 
+" FoldFocus
 map <Leader>ff :call FoldFocus('e')<CR>
 map <Leader>FF :call FoldFocus('vnew')<CR>
 
@@ -199,6 +202,31 @@ nnoremap vv ^vg_
 
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
+
+" Unite
+
+let g:unite_source_history_yank_enable = 1
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
+nnoremap <leader>T :Unite -no-split -buffer-name=buffers  -start-insert buffer<cr>
+nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
+nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
+
+
+
+
+" Custom mappings for the unite buffer
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+  " Play nice with supertab
+  let b:SuperTabDisabled=1
+  " Enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
 
 " ------------------------------------------------------------------------------
 " Search and Replace
@@ -354,4 +382,119 @@ function! NextClosedFold(dir)
     if open
         call winrestview(view)
     endif
+endfunction
+
+" FoldFocus
+" ----------------------------------------------------------------------------
+
+function! FindBufferForName(fileName)
+  return s:FindBufferForName(a:fileName)
+endfunction
+
+function! s:FindBufferForName(fileName)
+  let fileName = a:fileName
+  let _isf = &isfname
+  try
+    set isfname-=\
+    set isfname-=[
+    let i = bufnr('^' . fileName . '$')
+  finally
+    let &isfname = _isf
+  endtry
+
+  return
+endfunction
+
+let s:notifyWindow = {}
+
+function! AddNotifyWindowClose(windowTitle, functionName)
+  let bufName = a:windowTitle
+
+  let s:notifyWindow[bufName] = a:functionName
+
+  " Start listening to events.
+  aug NotifyWindowClose
+    au!
+    au WinEnter * :call CheckWindowClose()
+    au BufEnter * :call CheckWindowClose()
+  aug END
+endfunction
+
+function! RemoveNotifyWindowClose(windowTitle)
+  let bufName = a:windowTitle
+
+  if has_key(s:notifyWindow, bufName)
+    call remove(s:notifyWindow, bufName)
+    if len(s:notifyWindow) == 0
+      "unlet g:notifyWindow " Debug.
+
+      aug NotifyWindowClose
+        au!
+      aug END
+    endif
+  endif
+endfunction
+
+function! CheckWindowClose()
+  if !exists('s:notifyWindow')
+    return
+  endif
+
+  for nextWin in keys(s:notifyWindow)
+    if bufwinnr(s:FindBufferForName(nextWin)) == -1
+      let funcName = s:notifyWindow[nextWin]
+      unlet s:notifyWindow[nextWin]
+      "call input("cmd: " . cmd)
+      call call(funcName, [nextWin])
+    endif
+  endfor
+endfunction
+
+function! FoldFocus(bufferFunction)
+  let myFiletype = &filetype
+  let tmpBufferName = 'FoldFocus'
+  let tmpBufferWindow = bufwinnr('^' . tmpBufferName . '$')
+
+  let originalBuffer = bufname(0)
+  let originalBufferWindow = bufwinnr(originalBuffer)
+
+  silent! normal! zo
+  silent! normal! zc
+  silent! normal! k3yy
+
+  if (tmpBufferWindow >= 0)
+      execute tmpBufferWindow . 'wincmd w'
+      set modifiable
+      silent! normal! gg"_dG
+  else
+      set modifiable
+      setlocal splitright
+
+      execute a:bufferFunction . ' ' . tmpBufferName
+
+      setlocal nosplitright
+      setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  endif
+
+  autocmd QuitPre,BufDelete,BufUnload FoldFocus call CopyTmpBufferContent()
+  call AddNotifyWindowClose(tmpBufferName, 'TmpBufferClosed')
+
+  execute 'set filetype=' . myFiletype
+
+  silent! normal! p
+  silent! normal! ggdd
+  silent! normal! gg=G
+  silent! normal! zR
+
+  set nomodifiable
+endfunction
+
+function! TmpBufferClosed(windowTitle)
+  echo 'FECHOOOOOU !!!!!!!!!!!!!!!!!'
+  call RemoveNotifyWindowClose(a:windowTitle)
+endfunction
+
+function! CopyTmpBufferContent()
+  normal! yG
+  echo 'COPIOUUU !!!!!!!!!!!!!!!!'
 endfunction

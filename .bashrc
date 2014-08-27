@@ -23,3 +23,6 @@ export PATH=".git/safe/../../bin:$PATH"
 # hack to make sure that homebrew is
 # consulted first when looking for bins
 export PATH=/usr/local/bin:$PATH
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
