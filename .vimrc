@@ -150,7 +150,7 @@ map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 
 " FoldFocus
-map <Leader>ff :call FoldFocus('e')<CR>
+nmap <Leader><CR> :call FoldFocus('e')<CR>
 map <Leader>FF :call FoldFocus('vnew')<CR>
 
 map <Leader>bd :bd<CR>
@@ -450,13 +450,18 @@ function! CheckWindowClose()
   endfor
 endfunction
 
+let s:foldFocus = {}
+
 function! FoldFocus(bufferFunction)
   let myFiletype = &filetype
   let tmpBufferName = 'FoldFocus'
   let tmpBufferWindow = bufwinnr('^' . tmpBufferName . '$')
 
   let originalBuffer = bufname(0)
-  let originalBufferWindow = bufwinnr(originalBuffer)
+  let s:foldFocus['originalBufferWindow'] = bufwinnr(originalBuffer)
+
+  let s:foldFocus['foldStart'] = line('.')
+  "let s:foldFocus['foldEnd']   = foldclosedend(s:foldFocus['foldStart'])
 
   silent! normal! zo
   silent! normal! zc
@@ -464,37 +469,43 @@ function! FoldFocus(bufferFunction)
 
   if (tmpBufferWindow >= 0)
       execute tmpBufferWindow . 'wincmd w'
-      set modifiable
       silent! normal! gg"_dG
   else
-      set modifiable
-      setlocal splitright
-
       execute a:bufferFunction . ' ' . tmpBufferName
 
-      setlocal nosplitright
       setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  endif
 
-  autocmd QuitPre,BufDelete,BufUnload FoldFocus call CopyTmpBufferContent()
-  call AddNotifyWindowClose(tmpBufferName, 'TmpBufferClosed')
+      if (a:bufferFunction == 'e')
+        nnoremap <buffer> q :bp<cr>
+      endif
+
+      call AddNotifyWindowClose(tmpBufferName, 'PasteFocusContent')
+      au QuitPre,BufDelete,BufUnload FoldFocus call CopyFocusContent()
+  endif
 
   execute 'set filetype=' . myFiletype
 
   silent! normal! p
   silent! normal! ggdd
-  silent! normal! gg=G
   silent! normal! zR
-
-  set nomodifiable
 endfunction
 
-function! TmpBufferClosed(windowTitle)
-  echo 'FECHOOOOOU !!!!!!!!!!!!!!!!!'
+function! PasteFocusContent(windowTitle)
+  execute s:foldFocus['originalBufferWindow'] . 'wincmd w'
+  execute s:foldFocus['foldStart']
+
+  normal! k3"_dd
+  normal! k
+  normal! p
+  silent! normal! jzc
+
+  execute 'w'
+
   call RemoveNotifyWindowClose(a:windowTitle)
+  au! QuitPre,BufDelete,BufUnload FoldFocus
+  au! BufNewFile FoldFocus
 endfunction
 
-function! CopyTmpBufferContent()
-  normal! yG
-  echo 'COPIOUUU !!!!!!!!!!!!!!!!'
+function! CopyFocusContent()
+  normal! ggyG
 endfunction
