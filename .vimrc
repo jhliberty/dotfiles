@@ -18,7 +18,7 @@ set noswapfile
 set nomodeline
 set selection=inclusive                      " Select to the end of line.
 set pastetoggle=<F2>
-set textwidth=75                             " The format paragraph (gq) command uses this value to this what it have to do
+set textwidth=999999999                             " The format paragraph (gq) command uses this value to this what it have to do
 
 let mapleader = "\<Space>"
 
@@ -77,6 +77,7 @@ Bundle 'gorodinskiy/vim-coloresque'
 Bundle 'tpope/vim-haml'
 
 Bundle 'vasconcelloslf/vim-foldfocus'
+Bundle 'Raimondi/delimitMate'
 
 " ------------------------------------------------------------------------------
 " Mappings
@@ -150,8 +151,8 @@ map <Leader>bc :Bclose<CR>
 map <Leader>ba :call DeleteInactiveBufs()<CR>
 
 " FoldFocus
-nmap <Leader><CR> :call FoldFocus('e')<CR>
-map <Leader>FF :call FoldFocus('vnew')<CR>
+nmap <CR> :call FoldFocus('e')<CR>
+nmap <Leader><CR> :call FoldFocus('vnew')<CR>
 
 map <Leader>bd :bd<CR>
 
@@ -162,8 +163,8 @@ nmap <Leader>sa :sba<CR>
 nmap <Leader>va :vert sba<CR>
 
 " Reload and edit .vimrc
-nnoremap <leader>ev :vsplit /Users/vasconcelloslf/Dotfiles/.vimrc<cr>
-nnoremap <leader>rv :source /Users/vasconcelloslf/Dotfiles/.vimrc<cr>
+nnoremap <leader>ev :vsplit ~/Dotfiles/.vimrc<cr>
+nnoremap <leader>rv :source ~/Dotfiles/.vimrc<cr>
 
 " Move up/down the selected lines
 vnoremap <C-k> :mo'<-- <CR> gv
@@ -203,7 +204,9 @@ nnoremap vv ^vg_
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
 
+" ----------------------
 " Unite
+" ----------------------
 
 let g:unite_source_history_yank_enable = 1
 
@@ -215,8 +218,8 @@ nnoremap <leader>T :Unite -no-split -buffer-name=buffers  -start-insert buffer<c
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
-
-
+" call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
+call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
 
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
@@ -305,14 +308,10 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=222
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" Ignore some files with Ctrl+P
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
 " Resize all splits when the (tmux) panel is resized
 au VimResized * exe "normal! \<c-w>="
 
-" Open the file in the same line that the cursor were when the buffer was
-" closed
+" Open the file in the same line that the cursor were when the buffer was closed
 augroup line_return
   au!
   au BufReadPost *
@@ -325,24 +324,25 @@ augroup END
 " Don't close window, when deleting a buffer
 " -----------------------------------------
 command! Bclose call <SID>BufcloseCloseIt()
-  function! <SID>BufcloseCloseIt()
-     let l:currentBufNum = bufnr("%")
-     let l:alternateBufNum = bufnr("#")
 
-     if buflisted(l:alternateBufNum)
-       buffer #
-     else
-       bnext
-     endif
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
 
-     if bufnr("%") == l:currentBufNum
-       new
-     endif
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
 
-     if buflisted(l:currentBufNum)
-       execute("bdelete! ".l:currentBufNum)
-     endif
-  endfunction
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction
 
 " Close hidden buffers
 " -------------------
@@ -369,7 +369,6 @@ endfunction
 command! Bdi :call DeleteInactiveBufs()
 
 " Navigate through vim closed folds
-" ---------------------------------
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
     let view = winsaveview()
@@ -383,129 +382,4 @@ function! NextClosedFold(dir)
         call winrestview(view)
     endif
 endfunction
-
-" FoldFocus
-" ----------------------------------------------------------------------------
-
-function! FindBufferForName(fileName)
-  return s:FindBufferForName(a:fileName)
-endfunction
-
-function! s:FindBufferForName(fileName)
-  let fileName = a:fileName
-  let _isf = &isfname
-  try
-    set isfname-=\
-    set isfname-=[
-    let i = bufnr('^' . fileName . '$')
-  finally
-    let &isfname = _isf
-  endtry
-
-  return
-endfunction
-
-let s:notifyWindow = {}
-
-function! AddNotifyWindowClose(windowTitle, functionName)
-  let bufName = a:windowTitle
-
-  let s:notifyWindow[bufName] = a:functionName
-
-  " Start listening to events.
-  aug NotifyWindowClose
-    au!
-    au WinEnter * :call CheckWindowClose()
-    au BufEnter * :call CheckWindowClose()
-  aug END
-endfunction
-
-function! RemoveNotifyWindowClose(windowTitle)
-  let bufName = a:windowTitle
-
-  if has_key(s:notifyWindow, bufName)
-    call remove(s:notifyWindow, bufName)
-    if len(s:notifyWindow) == 0
-      "unlet g:notifyWindow " Debug.
-
-      aug NotifyWindowClose
-        au!
-      aug END
-    endif
-  endif
-endfunction
-
-function! CheckWindowClose()
-  if !exists('s:notifyWindow')
-    return
-  endif
-
-  for nextWin in keys(s:notifyWindow)
-    if bufwinnr(s:FindBufferForName(nextWin)) == -1
-      let funcName = s:notifyWindow[nextWin]
-      unlet s:notifyWindow[nextWin]
-      "call input("cmd: " . cmd)
-      call call(funcName, [nextWin])
-    endif
-  endfor
-endfunction
-
-let s:foldFocus = {}
-
-function! FoldFocus(bufferFunction)
-  let myFiletype = &filetype
-  let tmpBufferName = 'FoldFocus'
-  let tmpBufferWindow = bufwinnr('^' . tmpBufferName . '$')
-
-  let originalBuffer = bufname(0)
-  let s:foldFocus['originalBufferWindow'] = bufwinnr(originalBuffer)
-
-  let s:foldFocus['foldStart'] = line('.')
-  "let s:foldFocus['foldEnd']   = foldclosedend(s:foldFocus['foldStart'])
-
-  silent! normal! zo
-  silent! normal! zc
-  silent! normal! k3yy
-
-  if (tmpBufferWindow >= 0)
-      execute tmpBufferWindow . 'wincmd w'
-      silent! normal! gg"_dG
-  else
-      execute a:bufferFunction . ' ' . tmpBufferName
-
-      setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-
-      if (a:bufferFunction == 'e')
-        nnoremap <buffer> q :bp<cr>
-      endif
-
-      call AddNotifyWindowClose(tmpBufferName, 'PasteFocusContent')
-      au QuitPre,BufDelete,BufUnload FoldFocus call CopyFocusContent()
-  endif
-
-  execute 'set filetype=' . myFiletype
-
-  silent! normal! p
-  silent! normal! ggdd
-  silent! normal! zR
-endfunction
-
-function! PasteFocusContent(windowTitle)
-  execute s:foldFocus['originalBufferWindow'] . 'wincmd w'
-  execute s:foldFocus['foldStart']
-
-  normal! k3"_dd
-  normal! k
-  normal! p
-  silent! normal! jzc
-
-  execute 'w'
-
-  call RemoveNotifyWindowClose(a:windowTitle)
-  au! QuitPre,BufDelete,BufUnload FoldFocus
-  au! BufNewFile FoldFocus
-endfunction
-
-function! CopyFocusContent()
-  normal! ggyG
-endfunction
+" ---------------------------------
