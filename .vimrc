@@ -5,20 +5,20 @@
 set bdir+=/tmp
 set dir-=.
 set dir+=/tmp
-set nocompatible                             " Turn off vi compatibility.
-set undolevels=10000                         " Large undo levels.
-set undofile                                 " Save undo tree.
-set undodir=/tmp                             " Undo tree directory.
-set history=10000                            " Size of command history.
-set encoding=utf8                            " Always use unicode.
-set backspace=indent,eol,start               " Fix backspace.
-set nobackup                                 " Disable backups.
+set nocompatible
+set undolevels=10000
+set undofile
+set undodir=/tmp
+set history=10000
+set encoding=utf8
+set backspace=indent,eol,start
+set nobackup
 set nowritebackup
 set noswapfile
 set nomodeline
-set selection=inclusive                      " Select to the end of line.
+set selection=inclusive
 set pastetoggle=<F2>
-set textwidth=999999999                             " The format paragraph (gq) command uses this value to this what it have to do
+set textwidth=999999999
 
 let mapleader = "\<Space>"
 
@@ -33,51 +33,53 @@ set foldlevelstart=99
 " WhiteSpacing
 " ------------------------------------------------------------------------------
 
-set listchars=tab:>~,nbsp:_,trail:.  " Displays whitespaces and tab as chars
-set list
-
-set tabstop=2                     " Set tab to equal 4 spaces.
-set softtabstop=2                 " Set soft tabs equal to 4 spaces.
-set shiftwidth=2                  " Set auto indent spacing.
+autocmd BufWritePre * :%s/\s\+$//e
+set listchars=tab:>~,nbsp:_,trail:.
+set softtabstop=2
+set shiftwidth=2
 set expandtab
-
-autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace
+set tabstop=2
+set list
 
 " ------------------------------------------------------------------------------
 " Vundle
 " ------------------------------------------------------------------------------
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set nocompatible
+filetype off
 
-Bundle 'dhruvasagar/vim-railscasts-theme'
-Bundle 'Shougo/vimproc.vim'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'Shougo/unite.vim'
+Plugin 'dhruvasagar/vim-railscasts-theme'
 
-Bundle 'terryma/vim-smooth-scroll'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-endwise'
-Bundle 'szw/vim-maximizer'
-Bundle 'gregsexton/gitv'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
 
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'thoughtbot/vim-rspec'
-Bundle 'myusuf3/numbers.vim'
-Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-rsi'
+Plugin 'terryma/vim-smooth-scroll'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-endwise'
+Plugin 'szw/vim-maximizer'
+Plugin 'gregsexton/gitv'
 
-Bundle 'amirh/HTML-AutoCloseTag'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'gorodinskiy/vim-coloresque'
-Bundle 'tpope/vim-haml'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-rsi'
 
-Bundle 'vasconcelloslf/vim-foldfocus'
-Bundle 'Raimondi/delimitMate'
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'Raimondi/delimitMate'
+
+Plugin 'vasconcelloslf/vim-foldfocus'
+Plugin 'vasconcelloslf/vim-interestingwords'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " ------------------------------------------------------------------------------
 " Mappings
@@ -200,9 +202,9 @@ nnoremap vv ^vg_
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
 
-" ----------------------
-" Unite
-" ----------------------
+" ------------------------------------------------------------------------------
+" Unite.vim configurations
+" ------------------------------------------------------------------------------
 
 let g:unite_source_history_yank_enable = 1
 
@@ -214,14 +216,12 @@ nnoremap <leader>T :Unite -no-split -buffer-name=buffers  -start-insert buffer<c
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
-" call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
 call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|tmp/')
 
 " Custom mappings for the unite buffer
+"
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
@@ -231,30 +231,30 @@ endfunction
 " Search and Replace
 " ------------------------------------------------------------------------------
 
-set hlsearch                      " Highlight search patterns.
-set wrapscan                      " Wrap to top of buffer when searching.
+set hlsearch
+set wrapscan
 
 " ------------------------------------------------------------------------------
 " Presentation
 " ------------------------------------------------------------------------------
 
-set matchpairs+=<:>               " Pairs to match
-set shortmess=aIoO                " Show short messages, no intro.
-set cmdheight=1                   " Make command line height to 1 lines.
-set cursorline                    " Highlight current line
-set showmatch                     " Show matching parenthesis.
-set showcmd                       " Show last command.
-set hidden                        " Allow hidden buffers.
+set matchpairs+=<:>
+set shortmess=aIoO
+set cmdheight=1
+set cursorline
+set showmatch
+set showcmd
+set hidden
 set number
-set ruler                         " Show the cursor position.
-set cf                            " Enable error jumping.
+set ruler
+set cf
 
-syntax on                         " Enable syntax highlighting.
-filetype on                       " Detect file type.
-filetype indent on                " Enable file indenting.
-filetype plugin indent on         " Load syntax files for better indenting.
+syntax on
+filetype on
+filetype indent on
+filetype plugin indent on
 
-colorscheme railscasts " Load colorscheme
+colorscheme railscasts
 
 set t_ut=
 
@@ -280,7 +280,6 @@ augroup END
 
 
 " Don't close window when deleting a buffer
-" ------------------------------------------
 command! Bclose call <SID>BufcloseCloseIt()
 
 function! <SID>BufcloseCloseIt()
@@ -303,7 +302,6 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 " Close hidden buffers
-" --------------------
 function! DeleteInactiveBufs()
     "From tabpagebuflist() help, get a list of all buffers in all tabs
     let tablist = []
@@ -325,98 +323,3 @@ function! DeleteInactiveBufs()
 endfunction
 
 command! Bdi :call DeleteInactiveBufs()
-
-" ---------------------------------
-" VIM Interesting Words
-" ---------------------------------
-
-let s:interestingWords = []
-let s:mids = []
-
-function! ColorInterestingWord(n)
-  let currentWord = expand('<cword>') . ''
-
-  if (index(s:interestingWords, currentWord) == -1)
-    let mid = 86750 + a:n
-
-    call add(s:interestingWords, currentWord)
-    call add(s:mids, mid)
-
-    normal! mz
-    normal! "zyiw
-
-    let pat = '\V\<' . escape(@z, '\') . '\>'
-
-    call matchadd("InterestingWord" . a:n, pat, 1, mid)
-
-    normal! `z
-  else
-    call UncolorInterestingWord()
-  endif
-
-endfunction
-
-function! UncolorInterestingWord()
-  let currentWord = expand('<cword>') . ''
-  let currentWordPosition = index(s:interestingWords, currentWord)
-
-  if (currentWordPosition > -1)
-    let mid = s:mids[currentWordPosition]
-
-    silent! call matchdelete(mid)
-
-    call remove(s:interestingWords, currentWordPosition)
-    call remove(s:mids, currentWordPosition)
-  endif
-endfunction
-
-function! NavigateInterestingWord(direction)
-  let currentWord = expand('<cword>') . ''
-
-  if (index(s:interestingWords, currentWord) > -1)
-    if (a:direction == 'forward')
-      normal! *
-    endif
-
-    if (a:direction == 'backward')
-      normal! #
-    endif
-  else
-    if (a:direction == 'forward')
-      normal! n
-    endif
-
-    if (a:direction == 'backward')
-      normal! N
-    endif
-  endif
-endfunction
-
-function! CallInterestingWords()
-  call ColorInterestingWord(len(s:interestingWords) + 1)
-endfunction
-
-function! ClearInterestingWords()
-  if (len(s:mids) > 0)
-    for mid in s:mids
-      call matchdelete(mid)
-    endfor
-
-    call remove(s:mids, 0, -1)
-    call remove(s:interestingWords, 0, -1)
-  endif
-endfunction
-
-nnoremap <silent> K         :call CallInterestingWords()<cr>
-nnoremap <silent> <leader>k :call UncolorInterestingWord()<cr>
-nnoremap <silent> <leader>c :call ClearInterestingWords()<cr>
-
-nnoremap <silent> n :call NavigateInterestingWord('forward')<cr>
-nnoremap <silent> N :call NavigateInterestingWord('backward')<cr>
-
-hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
-hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
-hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
-hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
-hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=222
