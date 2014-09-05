@@ -131,10 +131,6 @@ nmap <C-w>t :NERDTreeToggle<CR>
 map <Leader>r :call RunNearestSpec()<CR>
 map <Leader>R :call RunCurrentSpecFile()<CR>
 
-" Navigate through closed folders
-nnoremap <silent> <leader>zj :call NextClosedFold('j')<cr>
-nnoremap <silent> <leader>zk :call NextClosedFold('k')<cr>
-
 " Git mappings (fugitive, gitgutter and gitv)
 map <Leader>gs :Gstatus<CR>
 map <Leader>gc :Gcommit<CR>
@@ -219,7 +215,7 @@ nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
 " call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
-call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
+call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|tmp/')
 
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
@@ -262,49 +258,11 @@ colorscheme railscasts " Load colorscheme
 
 set t_ut=
 
-" VIM Interesting Words
-function! HiInterestingWord(n)
-  " Save our location.
-  normal! mz
-
-  " Yank the current word into the z register.
-  normal! "zyiw
-
-  " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
-  let mid = 86750 + a:n
-
-  " Clear existing matches, but don't worry if they don't exist.
-  silent! call matchdelete(mid)
-
-  " Construct a literal pattern that has to match at boundaries.
-  let pat = '\V\<' . escape(@z, '\') . '\>'
-
-  " Actually match the words.
-  call matchadd("InterestingWord" . a:n, pat, 1, mid)
-
-  " Move back to our original location.
-  normal! `z
-endfunction
-
-nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-
-hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
-hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
-hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
-hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
-hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=222
-
 " ------------------------------------------------------------------------------
 " Misc
 " ------------------------------------------------------------------------------
 
-" buffer tabs
+" Airline buffer tabs
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
@@ -321,8 +279,8 @@ augroup line_return
 augroup END
 
 
-" Don't close window, when deleting a buffer
-" -----------------------------------------
+" Don't close window when deleting a buffer
+" ------------------------------------------
 command! Bclose call <SID>BufcloseCloseIt()
 
 function! <SID>BufcloseCloseIt()
@@ -345,7 +303,7 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 " Close hidden buffers
-" -------------------
+" --------------------
 function! DeleteInactiveBufs()
     "From tabpagebuflist() help, get a list of all buffers in all tabs
     let tablist = []
@@ -368,18 +326,97 @@ endfunction
 
 command! Bdi :call DeleteInactiveBufs()
 
-" Navigate through vim closed folds
-function! NextClosedFold(dir)
-    let cmd = 'norm!z' . a:dir
-    let view = winsaveview()
-    let [l0, l, open] = [0, view.lnum, 1]
-    while l != l0 && open
-        exe cmd
-        let [l0, l] = [l, line('.')]
-        let open = foldclosed(l) < 0
-    endwhile
-    if open
-        call winrestview(view)
-    endif
-endfunction
 " ---------------------------------
+" VIM Interesting Words
+" ---------------------------------
+
+let s:interestingWords = []
+let s:mids = []
+
+function! ColorInterestingWord(n)
+  let currentWord = expand('<cword>') . ''
+
+  if (index(s:interestingWords, currentWord) == -1)
+    let mid = 86750 + a:n
+
+    call add(s:interestingWords, currentWord)
+    call add(s:mids, mid)
+
+    normal! mz
+    normal! "zyiw
+
+    let pat = '\V\<' . escape(@z, '\') . '\>'
+
+    call matchadd("InterestingWord" . a:n, pat, 1, mid)
+
+    normal! `z
+  else
+    call UncolorInterestingWord()
+  endif
+
+endfunction
+
+function! UncolorInterestingWord()
+  let currentWord = expand('<cword>') . ''
+  let currentWordPosition = index(s:interestingWords, currentWord)
+
+  if (currentWordPosition > -1)
+    let mid = s:mids[currentWordPosition]
+
+    silent! call matchdelete(mid)
+
+    call remove(s:interestingWords, currentWordPosition)
+    call remove(s:mids, currentWordPosition)
+  endif
+endfunction
+
+function! NavigateInterestingWord(direction)
+  let currentWord = expand('<cword>') . ''
+
+  if (index(s:interestingWords, currentWord) > -1)
+    if (a:direction == 'forward')
+      normal! *
+    endif
+
+    if (a:direction == 'backward')
+      normal! #
+    endif
+  else
+    if (a:direction == 'forward')
+      normal! n
+    endif
+
+    if (a:direction == 'backward')
+      normal! N
+    endif
+  endif
+endfunction
+
+function! CallInterestingWords()
+  call ColorInterestingWord(len(s:interestingWords) + 1)
+endfunction
+
+function! ClearInterestingWords()
+  if (len(s:mids) > 0)
+    for mid in s:mids
+      call matchdelete(mid)
+    endfor
+
+    call remove(s:mids, 0, -1)
+    call remove(s:interestingWords, 0, -1)
+  endif
+endfunction
+
+nnoremap <silent> K         :call CallInterestingWords()<cr>
+nnoremap <silent> <leader>k :call UncolorInterestingWord()<cr>
+nnoremap <silent> <leader>c :call ClearInterestingWords()<cr>
+
+nnoremap <silent> n :call NavigateInterestingWord('forward')<cr>
+nnoremap <silent> N :call NavigateInterestingWord('backward')<cr>
+
+hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
+hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
+hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
+hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
+hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=222
