@@ -19,6 +19,8 @@ set nomodeline
 set selection=inclusive
 set pastetoggle=<F2>
 set textwidth=999999999
+set ignorecase
+set smartcase
 
 let mapleader = "\<Space>"
 
