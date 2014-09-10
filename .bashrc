@@ -1,5 +1,6 @@
 # ALIASES
 alias rm='rm -i'
+alias vim='vim'
 
 # DEFAULT EDITOR
 export EDITOR='/usr/local/bin/vim'
@@ -24,5 +25,16 @@ export PATH=".git/safe/../../bin:$PATH"
 # consulted first when looking for bins
 export PATH=/usr/local/bin:$PATH
 
-### Added by the Heroku Toolbelt
+# HEROKU TOOLBELT
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# OPEN VIM WITH OBSESSION BY DEFAULT
+function vim() {
+  if test $# -gt 0; then
+    env vim "$@"
+  elif test -f Session.vim; then
+    env vim -S
+  else
+    env vim -c Obsession
+  fi
+}

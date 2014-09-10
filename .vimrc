@@ -65,6 +65,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-obsession'
 Plugin 'szw/vim-maximizer'
 Plugin 'gregsexton/gitv'
 
