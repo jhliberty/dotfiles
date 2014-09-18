@@ -80,6 +80,7 @@ Plugin 'Raimondi/delimitMate'
 
 Plugin 'vasconcelloslf/vim-foldfocus'
 Plugin 'vasconcelloslf/vim-interestingwords'
+Plugin 'kannokanno/unite-todo'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -205,6 +206,10 @@ nnoremap vv ^vg_
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
 
+" Unite todo
+nnoremap <Leader>T :Unite todo<CR>
+nnoremap <Leader>NT :UniteTodoAddSimple<CR>
+
 " ------------------------------------------------------------------------------
 " Unite.vim configurations
 " ------------------------------------------------------------------------------
@@ -215,7 +220,6 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
 nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
-nnoremap <leader>T :Unite -no-split -buffer-name=buffers  -start-insert buffer<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
