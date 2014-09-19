@@ -55,9 +55,8 @@ call vundle#begin()
 
 Plugin 'dhruvasagar/vim-railscasts-theme'
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'airblade/vim-gitgutter'
@@ -81,6 +80,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'vasconcelloslf/vim-foldfocus'
 Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'kannokanno/unite-todo'
+Plugin 'mattn/flappyvird-vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -118,9 +118,6 @@ imap kJ <Esc>:w<CR>
 imap kj <Esc>:w<CR>
 imap KJ <Esc>:w<CR>
 
-" Go to the current file in the nerd tree
-nmap <leader>nf :NERDTreeFind<cr>
-
 " Paste mode
 nmap [p :set paste<CR>
 nmap ]p :set nopaste<CR>
@@ -129,9 +126,6 @@ nmap zM zMz
 
 " Maximize a window
 nnoremap <Leader>o :MaximizerToggle<CR>
-
-" Open nerd tree like with <C-w>t
-nmap <C-w>t :NERDTreeToggle<CR>
 
 " Run the tests in a spec file
 map <Leader>r :call RunNearestSpec()<CR>
@@ -219,6 +213,7 @@ let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
+nnoremap <leader>f :Unite -no-split -buffer-name=files    file<cr><cr>
 nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
@@ -229,10 +224,11 @@ call unite#custom#source('file_rec/async', 'ignore_pattern', 'database_songs/\|t
 " Custom mappings for the unite buffer
 "
 autocmd FileType unite call s:unite_settings()
+
 function! s:unite_settings()
-  " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  nmap <buffer> p       <Plug>(unite_exit)
 endfunction
 
 " ------------------------------------------------------------------------------
