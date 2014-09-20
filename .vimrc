@@ -219,7 +219,7 @@ nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
 " call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
-call unite#custom#source('file_rec/async', 'ignore_pattern', 'database_songs/\|tmp/\|node_modules/\|public/\|classes/')
+call unite#custom#source('file_rec/async', 'ignore_pattern', 'database_songs/\|tmp/\|node_modules/\|classes/')
 
 " Custom mappings for the unite buffer
 "

@@ -5,6 +5,7 @@
   email = vasconcelloslf@gmail.com
 [core]
   quotepath = false
+	excludefiles = /Users/vasconcelloslf/.gitignore
 [color]
   ui = true
 [log]
