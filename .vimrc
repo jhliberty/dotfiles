@@ -55,8 +55,9 @@ call vundle#begin()
 
 Plugin 'dhruvasagar/vim-railscasts-theme'
 
-Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimfiler.vim'
 
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'airblade/vim-gitgutter'
@@ -204,6 +205,12 @@ imap {<cr> {<cr>}<c-o>O
 nnoremap <Leader>T :Unite todo<CR>
 nnoremap <Leader>NT :UniteTodoAddSimple<CR>
 
+" Vimfiler
+nnoremap <Leader>f :VimFiler<CR>
+
+let g:vimfiler_safe_mode_by_default=0
+let g:vimfiler_as_default_explorere=1
+
 " ------------------------------------------------------------------------------
 " Unite.vim configurations
 " ------------------------------------------------------------------------------
@@ -213,7 +220,6 @@ let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <leader>f :Unite -no-split -buffer-name=files    file<cr><cr>
 nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
