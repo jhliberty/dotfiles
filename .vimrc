@@ -82,6 +82,7 @@ Plugin 'vasconcelloslf/vim-foldfocus'
 Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'kannokanno/unite-todo'
 Plugin 'mattn/flappyvird-vim'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -201,15 +202,14 @@ nnoremap vv ^vg_
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
 
-" Unite todo
-nnoremap <Leader>T :Unite todo<CR>
-nnoremap <Leader>NT :UniteTodoAddSimple<CR>
-
 " Vimfiler
 nnoremap <Leader>f :VimFiler<CR>
 
 let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_as_default_explorere=1
+
+" Tagbar
+nnoremap <Leader>T :TagbarToggle<CR>
 
 " ------------------------------------------------------------------------------
 " Unite.vim configurations
