@@ -203,13 +203,20 @@ nnoremap vv ^vg_
 imap {<cr> {<cr>}<c-o>O
 
 " Vimfiler
-nnoremap <Leader>f :VimFiler<CR>
+nnoremap <Leader>f :VimFiler -force-quit<CR>
 
 let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_as_default_explorere=1
 
 " Tagbar
 nnoremap <Leader>T :TagbarToggle<CR>
+
+autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor_map(
+      \ "\<Plug>(vimfiler_expand_tree)",
+      \ "\<Plug>(vimfiler_edit_file)")
+
+let g:vimfiler_execute_file_list = {}
+let g:vimfiler_execute_file_list['_'] = 'vim'
 
 " ------------------------------------------------------------------------------
 " Unite.vim configurations
