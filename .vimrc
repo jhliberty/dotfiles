@@ -54,7 +54,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'jpo/vim-railscasts-theme'
-Plugin 'whatyouhide/vim-gotham'
 
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
@@ -267,12 +266,13 @@ set number
 set ruler
 set cf
 
-syntax on
+syntax enable
 filetype on
 filetype indent on
 filetype plugin indent on
 
 colorscheme railscasts
+set background=light
 
 set t_ut=
 
