@@ -1,6 +1,5 @@
 # ALIASES
 alias rm='rm -i'
-alias vim='vim'
 
 # DEFAULT EDITOR
 export EDITOR='/usr/local/bin/vim'
@@ -8,10 +7,8 @@ export EDITOR='/usr/local/bin/vim'
 # IGNORE CTRL D
 set -o ignoreeof
 
-# SHELL SCRIPTS
-GIT_PROMPT_ONLY_IN_REPO=0
-
 # BASH GIT PROMPT
+GIT_PROMPT_ONLY_IN_REPO=0
 source ~/Dotfiles/bash-git-prompt/gitprompt.sh
 
 # RVM PATH
@@ -29,6 +26,7 @@ export PATH=/usr/local/bin:$PATH
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # OPEN VIM WITH OBSESSION BY DEFAULT
+# UNLESS A FILE ARGUMENT WAS PASSED
 function vim() {
   if test $# -gt 0; then
     env vim "$@"
