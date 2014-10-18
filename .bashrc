@@ -14,6 +14,9 @@ source ~/Dotfiles/bash-git-prompt/gitprompt.sh
 # RVM PATH
 export PATH="$PATH:$HOME/.rvm/bin"
 
+# ANDROID PATH
+export PATH=${PATH}:~/Development/Cordova/Android/android-sdk-macosx/platform-tools:~/Development/Cordova/Android/android-sdk-macosx/tools
+
 # hack to run vim-rspec with spring
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
