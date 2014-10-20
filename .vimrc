@@ -84,6 +84,7 @@ Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'kannokanno/unite-todo'
 Plugin 'mattn/flappyvird-vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'esneider/YUNOcommit.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -218,6 +219,8 @@ autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor
 
 let g:vimfiler_execute_file_list = {}
 let g:vimfiler_execute_file_list['_'] = 'vim'
+
+let g:YUNOcommit_after=20
 
 " ------------------------------------------------------------------------------
 " Unite.vim configurations
