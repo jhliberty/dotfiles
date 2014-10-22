@@ -38,7 +38,7 @@ function git_prompt_config()
   local Magenta="\[\033[1;95m\]"      # Purple
 
   # Regular Colors
-  local Yellow="\[\033[0;33m\]"
+  local Yellow="\e[93m"
   local White='\[\033[37m\]'
   local Red="\[\033[0;31m\]"
   local Blue="\[\033[0;34m\]"
