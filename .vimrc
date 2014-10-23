@@ -22,7 +22,6 @@ set textwidth=999999999
 set ignorecase
 set smartcase
 set formatoptions-=r
-
 let mapleader = "\<Space>"
 
 " ------------------------------------------------------------------------------
@@ -261,7 +260,7 @@ set wrapscan
 
 set matchpairs+=<:>
 set shortmess=aIoO
-set cmdheight=1
+set cmdheight=2
 set cursorline
 set showmatch
 set showcmd
