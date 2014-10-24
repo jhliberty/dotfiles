@@ -82,7 +82,6 @@ Plugin 'vasconcelloslf/vim-foldfocus'
 Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'kannokanno/unite-todo'
 Plugin 'mattn/flappyvird-vim'
-Plugin 'majutsushi/tagbar'
 Plugin 'vasconcelloslf/YUNOcommit.vim'
 
 call vundle#end()            " required
@@ -233,12 +232,12 @@ let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
+nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec:!<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
 " call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
-call unite#custom#source('file_rec/async', 'ignore_pattern', 'plugins/\|database_songs/\|tmp/\|node_modules/\|platforms/\|.vagrant/\|classes/')
+call unite#custom#source('file_rec', 'ignore_pattern', 'plugins/\|database_songs/\|tmp/\|node_modules/\|platforms/\|.vagrant/\|classes/\|lib/\|bower_components/')
 
 " Custom mappings for the unite buffer
 "
