@@ -203,12 +203,6 @@ nnoremap vv ^vg_
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
 
-" Vimfiler
-nnoremap <Leader>f :VimFiler -force-quit<CR>
-
-let g:vimfiler_safe_mode_by_default=0
-let g:vimfiler_as_default_explorere=1
-
 " Tagbar
 nnoremap <Leader>T :TagbarToggle<CR>
 
@@ -216,13 +210,22 @@ autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor
       \ "\<Plug>(vimfiler_expand_tree)",
       \ "\<Plug>(vimfiler_edit_file)")
 
-let g:vimfiler_execute_file_list = {}
-let g:vimfiler_execute_file_list['_'] = 'vim'
-
 let g:YUNOcommit_after=50
 
 " ------------------------------------------------------------------------------
-" Unite.vim configurations
+" Vimfiler
+" ------------------------------------------------------------------------------
+
+let g:vimfiler_safe_mode_by_default=0
+let g:vimfiler_as_default_explorere=1
+
+nnoremap <Leader>f :VimFiler -force-quit<CR>
+
+let g:vimfiler_execute_file_list = {}
+let g:vimfiler_execute_file_list['_'] = 'vim'
+
+" ------------------------------------------------------------------------------
+" Unite
 " ------------------------------------------------------------------------------
 
 let g:unite_source_history_yank_enable = 1
@@ -246,6 +249,7 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
   nmap <buffer> p       <Plug>(unite_exit)
 endfunction
+
 
 " ------------------------------------------------------------------------------
 " Search and Replace
@@ -344,3 +348,11 @@ function! DeleteInactiveBufs()
 endfunction
 
 command! Bdi :call DeleteInactiveBufs()
+
+" ------------------------------------------------------------------------------
+" Vimfiler Colors
+" ------------------------------------------------------------------------------
+
+highlight vimfilerOpenedFile ctermfg=82
+highlight vimfilerClosedFile ctermfg=82
+highlight vimfilerNonMark    ctermfg=82 cterm=bold
