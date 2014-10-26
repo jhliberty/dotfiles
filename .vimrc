@@ -22,6 +22,7 @@ set textwidth=999999999
 set ignorecase
 set smartcase
 set formatoptions-=r
+set breakindent
 let mapleader = "\<Space>"
 
 " ------------------------------------------------------------------------------
@@ -67,7 +68,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-obsession'
 Plugin 'szw/vim-maximizer'
-Plugin 'gregsexton/gitv'
 
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'thoughtbot/vim-rspec'
@@ -80,8 +80,6 @@ Plugin 'Raimondi/delimitMate'
 
 Plugin 'vasconcelloslf/vim-foldfocus'
 Plugin 'vasconcelloslf/vim-interestingwords'
-Plugin 'kannokanno/unite-todo'
-Plugin 'mattn/flappyvird-vim'
 Plugin 'vasconcelloslf/YUNOcommit.vim'
 
 call vundle#end()            " required
