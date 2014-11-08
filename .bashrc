@@ -1,9 +1,10 @@
 # ALIASES
+alias v='nvim'
 alias rm='rm -i'
 alias vim='nvim'
 
 # DEFAULT EDITOR
-export EDITOR='/usr/local/bin/vim'
+export EDITOR='/usr/local/bin/nvim'
 
 # IGNORE CTRL D
 set -o ignoreeof
