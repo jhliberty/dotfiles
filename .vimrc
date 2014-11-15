@@ -54,6 +54,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'gmarik/Vundle.vim'
+
 Plugin 'dhruvasagar/vim-railscasts-theme'
 
 Plugin 'Shougo/vimproc.vim'

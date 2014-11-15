@@ -1,10 +1,10 @@
 # ALIASES
-alias v='nvim'
+alias v='vim'
 alias rm='rm -i'
-alias vim='nvim'
+alias vim='vim'
 
 # DEFAULT EDITOR
-export EDITOR='/usr/local/bin/nvim'
+export EDITOR='/usr/local/bin/vim'
 
 # IGNORE CTRL D
 set -o ignoreeof
@@ -20,7 +20,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH=${PATH}:~/Development/Cordova/Android/android-sdk-macosx/platform-tools:~/Development/Cordova/Android/android-sdk-macosx/tools
 
 # NEOVIM
-export PATH="${PATH}:/usr/local/Cellar/neovim/HEAD/bin/nvim"
+export PATH="${PATH}:/usr/local/Cellar/neovim/HEAD/bin/vim"
 
 # hack to run vim-rspec with spring
 # mkdir .git/safe in the root of repositories you trust
@@ -35,12 +35,12 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # OPEN VIM WITH OBSESSION BY DEFAULT
 # UNLESS A FILE ARGUMENT WAS PASSED
-function nvim() {
+function vim() {
   if test $# -gt 0; then
-    env nvim "$@"
+    env vim "$@"
   elif test -f Session.vim; then
-    env nvim -S
+    env vim -S
   else
-    env nvim -c Obsession
+    env vim -c Obsession
   fi
 }
