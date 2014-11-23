@@ -22,7 +22,8 @@ set textwidth=999999999
 set ignorecase
 set smartcase
 set formatoptions-=r
-set breakindent
+set scrolloff=5
+
 let mapleader = "\<Space>"
 
 " ------------------------------------------------------------------------------
@@ -202,14 +203,14 @@ nnoremap vv ^vg_
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
 
-" Tagbar
-nnoremap <Leader>T :TagbarToggle<CR>
-
 autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor_map(
       \ "\<Plug>(vimfiler_expand_tree)",
       \ "\<Plug>(vimfiler_edit_file)")
 
+" YUNOCommit
 let g:YUNOcommit_after=50
+
+"
 
 " ------------------------------------------------------------------------------
 " Vimfiler
