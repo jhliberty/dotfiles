@@ -22,7 +22,6 @@ set textwidth=999999999
 set ignorecase
 set smartcase
 set formatoptions-=r
-set scrolloff=5
 
 let mapleader = "\<Space>"
 
@@ -63,27 +62,27 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-obsession'
-Plugin 'szw/vim-maximizer'
 
+Plugin 'vasconcelloslf/vim-foldfocus'
+Plugin 'vasconcelloslf/vim-interestingwords'
+Plugin 'vasconcelloslf/YUNOcommit.vim'
+
+Plugin 'terryma/vim-smooth-scroll'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'szw/vim-maximizer'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-rsi'
-
 Plugin 'gorodinskiy/vim-coloresque'
 Plugin 'Raimondi/delimitMate'
 
-Plugin 'vasconcelloslf/vim-foldfocus'
-Plugin 'vasconcelloslf/vim-interestingwords'
-Plugin 'vasconcelloslf/YUNOcommit.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
