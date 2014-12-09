@@ -1,27 +1,26 @@
 " ------------------------------------------------------------------------------
 " General Settings
 " ------------------------------------------------------------------------------
-
-set bdir+=/tmp
 set dir-=.
-set dir+=/tmp
-set nocompatible
-set undolevels=10000
 set undofile
-set undodir=/tmp
-set history=10000
-set encoding=utf8
-set backspace=indent,eol,start
 set nobackup
-set nowritebackup
+set smartcase
+set dir+=/tmp
 set noswapfile
 set nomodeline
-set selection=inclusive
-set pastetoggle=<F2>
-set textwidth=999999999
 set ignorecase
-set smartcase
+set bdir+=/tmp
+set nocompatible
+set undodir=/tmp
+set history=10000
+set nowritebackup
+set encoding=utf8
+set pastetoggle=<F2>
 set formatoptions-=r
+set undolevels=10000
+set textwidth=999999999
+set selection=inclusive
+set backspace=indent,eol,start
 
 let mapleader = "\<Space>"
 
@@ -36,7 +35,6 @@ set foldlevelstart=99
 " WhiteSpacing
 " ------------------------------------------------------------------------------
 
-autocmd BufWritePre * :%s/\s\+$//e
 set listchars=tab:>~,nbsp:_,trail:.
 set softtabstop=2
 set shiftwidth=2
@@ -44,45 +42,43 @@ set expandtab
 set tabstop=2
 set list
 
+autocmd BufWritePre * :%s/\s\+$//e
+
 " ------------------------------------------------------------------------------
 " Vundle
 " ------------------------------------------------------------------------------
 
-set nocompatible
 filetype off
+set nocompatible
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-
 Plugin 'dhruvasagar/vim-railscasts-theme'
 
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimfiler.vim'
 
-Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-commentary'
 
 Plugin 'vasconcelloslf/vim-foldfocus'
-Plugin 'vasconcelloslf/vim-interestingwords'
 Plugin 'vasconcelloslf/YUNOcommit.vim'
+Plugin 'vasconcelloslf/vim-interestingwords'
 
-Plugin 'terryma/vim-smooth-scroll'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'szw/vim-maximizer'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'myusuf3/numbers.vim'
-Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-rsi'
-Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'szw/vim-maximizer'
+Plugin 'bling/vim-airline'
+Plugin 'myusuf3/numbers.vim'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'Raimondi/delimitMate'
-
+Plugin 'airblade/vim-gitgutter'
+Plugin 'gorodinskiy/vim-coloresque'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -152,8 +148,6 @@ map <Leader>ba :call DeleteInactiveBufs()<CR>
 nmap <CR> :call FoldFocus('e')<CR>
 nmap <Leader><CR> :call FoldFocus('vnew')<CR>
 
-map <Leader>bd :bd<CR>
-
 " Open all buffers vertical splitted
 nmap <Leader>sa :sba<CR>
 
@@ -167,10 +161,6 @@ nnoremap <leader>rv :source ~/Dotfiles/.vimrc<cr>
 " Move up/down the selected lines
 vnoremap <C-k> :mo'<-- <CR> gv
 vnoremap <C-j> :mo'>+ <CR> gv
-
-" Smooth scrool
-noremap <silent> <C-b> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <C-f> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 
 " Clone the current paragraph
 noremap cp yap<S-}>p
@@ -193,9 +183,6 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
-" Lowercase the current word
-noremap <C-u> gUiw
-
 " Highlight the current line
 nnoremap vv ^vg_
 
@@ -209,19 +196,25 @@ autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor
 " YUNOCommit
 let g:YUNOcommit_after=50
 
-"
+" Airline buffer tabs
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Resize all splits when the (tmux) panel is resized
+au VimResized * exe "normal! \<c-w>="
 
 " ------------------------------------------------------------------------------
 " Vimfiler
 " ------------------------------------------------------------------------------
 
+
 let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_as_default_explorere=1
 
-nnoremap <Leader>f :VimFiler -force-quit<CR>
-
 let g:vimfiler_execute_file_list = {}
 let g:vimfiler_execute_file_list['_'] = 'vim'
+
+nnoremap <Leader>f :VimFiler -force-quit<CR>
 
 " ------------------------------------------------------------------------------
 " Unite
@@ -240,7 +233,6 @@ nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 call unite#custom#source('file_rec', 'ignore_pattern', 'plugins/\|database_songs/\|tmp/\|node_modules/\|platforms/\|.vagrant/\|classes/\|lib/\|bower_components/')
 
 " Custom mappings for the unite buffer
-"
 autocmd FileType unite call s:unite_settings()
 
 function! s:unite_settings()
@@ -248,7 +240,6 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
   nmap <buffer> p       <Plug>(unite_exit)
 endfunction
-
 
 " ------------------------------------------------------------------------------
 " Search and Replace
@@ -261,6 +252,10 @@ set wrapscan
 " Presentation
 " ------------------------------------------------------------------------------
 
+colorscheme railscasts
+syntax enable
+
+set background=light
 set matchpairs+=<:>
 set shortmess=aIoO
 set cmdheight=2
@@ -269,29 +264,17 @@ set showmatch
 set showcmd
 set hidden
 set number
+set t_ut=
 set ruler
 set cf
 
-syntax enable
-filetype on
-filetype indent on
 filetype plugin indent on
-
-colorscheme railscasts
-set background=light
-
-set t_ut=
+filetype indent on
+filetype on
 
 " ------------------------------------------------------------------------------
-" Misc
+" Misc Functions
 " ------------------------------------------------------------------------------
-
-" Airline buffer tabs
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-" Resize all splits when the (tmux) panel is resized
-au VimResized * exe "normal! \<c-w>="
 
 " Open the file in the same line that the cursor were when the buffer was closed
 augroup line_return
@@ -301,7 +284,6 @@ augroup line_return
     \   execute 'normal! g`"zvzz' |
     \ endif
 augroup END
-
 
 " Don't close window when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
