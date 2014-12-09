@@ -1,0 +1,9 @@
+# This is a global .gitignore file.
+# In order to make it work across all git repos, run this:
+#
+# cd ~
+# ln ~/Dotfiles/.global-gitignore ~/.gitignore
+# git config --global core.excludesfile '~/.gitignore'
+
+Session.vim
+*.vim
