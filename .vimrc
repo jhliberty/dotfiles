@@ -78,7 +78,6 @@ Plugin 'myusuf3/numbers.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'Raimondi/delimitMate'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'gorodinskiy/vim-coloresque'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
