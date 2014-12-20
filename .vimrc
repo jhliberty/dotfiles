@@ -57,8 +57,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'dhruvasagar/vim-railscasts-theme'
 
-Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimfiler.vim'
 
 Plugin 'tpope/vim-endwise'
