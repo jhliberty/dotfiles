@@ -55,6 +55,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
+
 Plugin 'dhruvasagar/vim-railscasts-theme'
 
 Plugin 'Shougo/unite.vim'
@@ -72,6 +73,7 @@ Plugin 'vasconcelloslf/YUNOcommit.vim'
 Plugin 'vasconcelloslf/vim-interestingwords'
 
 Plugin 'tpope/vim-rsi'
+Plugin 'mattn/emmet-vim'
 Plugin 'szw/vim-maximizer'
 Plugin 'bling/vim-airline'
 Plugin 'myusuf3/numbers.vim'
@@ -201,6 +203,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Resize all splits when the (tmux) panel is resized
 au VimResized * exe "normal! \<c-w>="
+
+" Emmet
+
+let g:user_emmet_settings = {
+\  'indentation' : '  '
+\}
 
 " ------------------------------------------------------------------------------
 " Vimfiler
