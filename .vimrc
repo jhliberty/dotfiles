@@ -149,12 +149,6 @@ map <Leader>ba :call DeleteInactiveBufs()<CR>
 nmap <CR> :call FoldFocus('e')<CR>
 nmap <Leader><CR> :call FoldFocus('vnew')<CR>
 
-" Open all buffers vertical splitted
-nmap <Leader>sa :sba<CR>
-
-" Open all buffers horizontal splitted
-nmap <Leader>va :vert sba<CR>
-
 " Reload and edit .vimrc
 nnoremap <leader>ev :vsplit ~/Dotfiles/.vimrc<cr>
 nnoremap <leader>rv :source ~/Dotfiles/.vimrc<cr>
