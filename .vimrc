@@ -207,8 +207,6 @@ let g:user_emmet_settings = {
 " ------------------------------------------------------------------------------
 " Vimfiler
 " ------------------------------------------------------------------------------
-
-
 let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_as_default_explorere=1
 
@@ -226,7 +224,7 @@ let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec:!<cr>
+nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
 nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
 nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
 
