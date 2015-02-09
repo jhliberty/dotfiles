@@ -56,7 +56,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'dhruvasagar/vim-railscasts-theme'
+Plugin 'vasconcelloslf/vim-railscasts-theme'
 
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
