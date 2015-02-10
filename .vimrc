@@ -95,12 +95,6 @@ noremap q :q<cr>
 noremap <leader>w :w<CR>
 nnoremap <leader>s :%s/
 
-" Remap ctrlp and ctrlbuffer
-let g:ctrlp_map = '<Leader>t'
-
-nmap <leader>t :CtrlP<CR>
-nmap <leader>T :CtrlPBuffer<CR>
-
 " Find with ack ignoring .log files
 nmap <leader>ss :Ack --ignore-dir=log<Space>
 nmap <leader>sw :Ack <CR><Space>
@@ -205,7 +199,7 @@ let g:user_emmet_settings = {
 \}
 
 " ------------------------------------------------------------------------------
-" Vimfiler
+" Unite
 " ------------------------------------------------------------------------------
 let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_as_default_explorere=1
@@ -213,20 +207,15 @@ let g:vimfiler_as_default_explorere=1
 let g:vimfiler_execute_file_list = {}
 let g:vimfiler_execute_file_list['_'] = 'vim'
 
-nnoremap <Leader>f :VimFiler -force-quit<CR>
-
-" ------------------------------------------------------------------------------
-" Unite
-" ------------------------------------------------------------------------------
-
 let g:unite_source_history_yank_enable = 1
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <leader>t :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
-nnoremap <leader>y :Unite -no-split -buffer-name=yank     history/yank<cr>
-nnoremap <leader>s :Unite -no-split -buffer-name=search   grep:.<cr>
+nnoremap <C-f> :VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit <CR>
+nnoremap <C-t> :Unite -no-split -buffer-name=files    -start-insert file_rec/async<cr>
+nnoremap <C-y> :Unite -no-split -buffer-name=yank     history/yank<cr>
+nnoremap <C-s> :Unite -no-split -buffer-name=search   grep:.<cr>
 
 " call unite#custom#source('file_rec/async', 'ignore_pattern', 'node_modules/\|database_songs/\|public/')
 call unite#custom#source('file_rec', 'ignore_pattern', 'plugins/\|database_songs/\|tmp/\|node_modules/\|platforms/\|.vagrant/\|classes/\|lib/\|bower_components/')
