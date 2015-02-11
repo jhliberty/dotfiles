@@ -64,7 +64,6 @@ Plugin 'Shougo/vimfiler.vim'
 Plugin 'Shougo/neomru.vim'
 
 Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-commentary'
@@ -96,10 +95,6 @@ noremap q :q<cr>
 noremap <leader>w :w<CR>
 nnoremap <leader>s :%s/
 
-" Find with ack ignoring .log files
-nmap <leader>ss :Ack --ignore-dir=log<Space>
-nmap <leader>sw :Ack <CR><Space>
-
 " Indent with tab and shift+tab the selected lines
 vmap <Tab> >gv
 vmap <S-Tab> <gv
@@ -108,14 +103,12 @@ vmap <S-Tab> <gv
 imap jk <Esc>:w<CR>
 imap JK <Esc>:w<CR>
 imap jK <Esc>:w<CR>
-imap kJ <Esc>:w<CR>
-imap kj <Esc>:w<CR>
-imap KJ <Esc>:w<CR>
 
 " Paste mode
 nmap [p :set paste<CR>
 nmap ]p :set nopaste<CR>
 
+" Better folding
 nmap zM zMz
 
 " Maximize a window
@@ -170,18 +163,11 @@ function! s:VSetSearch()
   let @@ = temp
 endfunction
 
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
-
 " Highlight the current line
 nnoremap vv ^vg_
 
 " Position the cursor in the right place after typing {}
 imap {<cr> {<cr>}<c-o>O
-
-autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor_map(
-      \ "\<Plug>(vimfiler_expand_tree)",
-      \ "\<Plug>(vimfiler_edit_file)")
 
 " YUNOCommit
 let g:YUNOcommit_after=50
@@ -195,41 +181,31 @@ let g:airline#extensions#tabline#excludes = ['vimfiler:explorer']
 au VimResized * exe "normal! \<c-w>="
 
 " Emmet
-
 let g:user_emmet_settings = {
 \  'indentation' : '  '
 \}
 
-" ------------------------------------------------------------------------------
-" Unite
-" ------------------------------------------------------------------------------
+" Unite & Vimfiler
 let g:vimfiler_safe_mode_by_default=0
-let g:vimfiler_as_default_explorere=1
-
+let g:vimfiler_as_default_explorer=1
 let g:vimfiler_execute_file_list = {}
 let g:vimfiler_execute_file_list['_'] = 'vim'
-
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_filename_format = ':.'
 
-nnoremap <C-f> :VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit <CR>
-nnoremap <C-t> :Unite -no-split -buffer-name=files    -start-insert file_rec/async:!<cr>
-nnoremap <C-m> :Unite -buffer-name=mru      file_mru<cr>
-nnoremap <C-y> :Unite -buffer-name=yank     history/yank<cr>
-nnoremap <C-g> :Unite -buffer-name=search   grep:.<cr>
+nnoremap <C-f>     :VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<cr>
+nnoremap <C-t>     :Unite    -buffer-name=files    -start-insert -no-split file_rec/async:!<cr>
+nnoremap <Leader>m :Unite    -buffer-name=mru      file_mru<cr>
+nnoremap <Leader>y :Unite    -buffer-name=yank     history/yank<cr>
+nnoremap <Leader>S :Unite    -buffer-name=search   grep:.<cr>
 
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('file_rec/async,grep', 'ignore_pattern', 'plugins/\|database_songs/\|tmp/\|node_modules/\|platforms/\|.vagrant/\|classes/\|lib/\|bower_components/')
 
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-
-function! s:unite_settings()
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-  nmap <buffer> p       <Plug>(unite_exit)
-endfunction
+autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor_map(
+      \ "\<Plug>(vimfiler_expand_tree)",
+      \ "\<Plug>(vimfiler_edit_file)")
 
 " ------------------------------------------------------------------------------
 " Search and Replace

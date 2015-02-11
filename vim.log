@@ -1,0 +1,123 @@
+
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.010  000.010: --- VIM STARTING ---
+000.092  000.082: Allocated generic buffers
+000.319  000.227: locale set
+000.323  000.004: clipboard setup
+000.330  000.007: window checked
+012.218  011.888: inits 1
+012.229  000.011: parsing arguments
+012.231  000.002: expanding arguments
+015.126  002.895: shell init
+015.441  000.315: Termcap init
+015.460  000.019: inits 2
+015.626  000.166: init highlight
+016.270  000.047  000.047: sourcing /usr/local/share/vim/vim74/ftoff.vim
+016.630  000.199  000.199: sourcing /Users/luisvasconcellos/.vim/bundle/Vundle.vim/autoload/vundle.vim
+017.088  000.288  000.288: sourcing /Users/luisvasconcellos/.vim/bundle/Vundle.vim/autoload/vundle/config.vim
+041.110  018.894  018.894: sourcing /usr/local/share/vim/vim74/filetype.vim
+041.528  000.058  000.058: sourcing /usr/local/share/vim/vim74/ftplugin.vim
+041.985  000.125  000.125: sourcing /usr/local/share/vim/vim74/indent.vim
+042.923  000.129  000.129: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/unite/filters/sorter_default.vim
+043.176  000.123  000.123: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/unite/filters/matcher_default.vim
+043.662  000.031  000.031: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/vital.vim
+044.768  000.437  000.437: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/vital/_unite.vim
+047.784  000.515  000.515: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/vital/_unite/prelude.vim
+049.496  006.213  005.230: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/unite/util.vim
+050.111  000.509  000.509: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/unite/custom.vim
+050.967  000.667  000.667: sourcing /Users/luisvasconcellos/.vim/bundle/vim-railscasts-theme/colors/railscasts.vim
+052.049  000.289  000.289: sourcing /usr/local/share/vim/vim74/syntax/syncolor.vim
+052.716  000.208  000.208: sourcing /usr/local/share/vim/vim74/syntax/syncolor.vim
+053.231  001.837  001.340: sourcing /Users/luisvasconcellos/.vim/bundle/vim-railscasts-theme/colors/railscasts.vim
+053.339  002.045  000.208: sourcing /usr/local/share/vim/vim74/syntax/synload.vim
+053.380  002.349  000.304: sourcing /usr/local/share/vim/vim74/syntax/syntax.vim
+053.985  000.203  000.203: sourcing /usr/local/share/vim/vim74/syntax/syncolor.vim
+054.648  000.206  000.206: sourcing /usr/local/share/vim/vim74/syntax/syncolor.vim
+055.162  001.714  001.305: sourcing /Users/luisvasconcellos/.vim/bundle/vim-railscasts-theme/colors/railscasts.vim
+055.426  000.019  000.019: sourcing /usr/local/share/vim/vim74/filetype.vim
+055.786  000.016  000.016: sourcing /usr/local/share/vim/vim74/ftplugin.vim
+056.142  000.014  000.014: sourcing /usr/local/share/vim/vim74/indent.vim
+056.463  000.015  000.015: sourcing /usr/local/share/vim/vim74/filetype.vim
+056.786  000.024  000.024: sourcing /usr/local/share/vim/vim74/indent.vim
+057.123  000.015  000.015: sourcing /usr/local/share/vim/vim74/filetype.vim
+057.482  041.583  010.165: sourcing /Users/luisvasconcellos/Dotfiles/.vimrc
+057.490  041.652  000.069: sourcing $HOME/.vimrc
+057.495  000.217: sourcing vimrc file(s)
+058.173  000.313  000.313: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/plugin/unite/bookmark.vim
+058.394  000.179  000.179: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/plugin/unite/buffer.vim
+058.569  000.138  000.138: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/plugin/unite/history_yank.vim
+058.730  000.124  000.124: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/plugin/unite/window.vim
+059.100  000.333  000.333: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/plugin/unite.vim
+059.390  000.148  000.148: sourcing /Users/luisvasconcellos/.vim/bundle/vimproc.vim/plugin/vimproc.vim
+059.874  000.364  000.364: sourcing /Users/luisvasconcellos/.vim/bundle/vimfiler.vim/plugin/vimfiler.vim
+060.171  000.172  000.172: sourcing /Users/luisvasconcellos/.vim/bundle/neomru.vim/plugin/neomru.vim
+060.686  000.363  000.363: sourcing /Users/luisvasconcellos/.vim/bundle/vim-endwise/plugin/endwise.vim
+061.461  000.662  000.662: sourcing /Users/luisvasconcellos/.vim/bundle/vim-surround/plugin/surround.vim
+066.172  004.582  004.582: sourcing /Users/luisvasconcellos/.vim/bundle/vim-fugitive/plugin/fugitive.vim
+066.457  000.131  000.131: sourcing /Users/luisvasconcellos/.vim/bundle/vim-obsession/plugin/obsession.vim
+066.888  000.304  000.304: sourcing /Users/luisvasconcellos/.vim/bundle/vim-commentary/plugin/commentary.vim
+067.133  000.124  000.124: sourcing /Users/luisvasconcellos/.vim/bundle/vim-foldfocus/plugin/foldfocus.vim
+067.351  000.105  000.105: sourcing /Users/luisvasconcellos/.vim/bundle/YUNOcommit.vim/plugin/YUNOcommit.vim
+067.826  000.361  000.361: sourcing /Users/luisvasconcellos/.vim/bundle/vim-interestingwords/plugin/interestingwords.vim
+068.331  000.375  000.375: sourcing /Users/luisvasconcellos/.vim/bundle/vim-rsi/plugin/rsi.vim
+070.845  002.398  002.398: sourcing /Users/luisvasconcellos/.vim/bundle/emmet-vim/plugin/emmet.vim
+071.128  000.146  000.146: sourcing /Users/luisvasconcellos/.vim/bundle/vim-maximizer/plugin/maximizer.vim
+071.686  000.193  000.193: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline.vim
+071.955  000.707  000.514: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/plugin/airline.vim
+072.373  000.295  000.295: sourcing /Users/luisvasconcellos/.vim/bundle/numbers.vim/plugin/numbers.vim
+072.988  000.488  000.488: sourcing /Users/luisvasconcellos/.vim/bundle/vim-rspec/plugin/rspec.vim
+074.357  000.534  000.534: sourcing /Users/luisvasconcellos/.vim/bundle/delimitMate/autoload/delimitMate.vim
+077.907  004.802  004.268: sourcing /Users/luisvasconcellos/.vim/bundle/delimitMate/plugin/delimitMate.vim
+078.794  000.147  000.147: sourcing /Users/luisvasconcellos/.vim/bundle/vim-gitgutter/autoload/gitgutter/highlight.vim
+079.670  001.621  001.474: sourcing /Users/luisvasconcellos/.vim/bundle/vim-gitgutter/plugin/gitgutter.vim
+080.187  000.085  000.085: sourcing /usr/local/share/vim/vim74/plugin/getscriptPlugin.vim
+080.482  000.260  000.260: sourcing /usr/local/share/vim/vim74/plugin/gzip.vim
+080.757  000.235  000.235: sourcing /usr/local/share/vim/vim74/plugin/matchparen.vim
+081.370  000.576  000.576: sourcing /usr/local/share/vim/vim74/plugin/netrwPlugin.vim
+081.454  000.028  000.028: sourcing /usr/local/share/vim/vim74/plugin/rrhelper.vim
+081.548  000.054  000.054: sourcing /usr/local/share/vim/vim74/plugin/spellfile.vim
+081.833  000.241  000.241: sourcing /usr/local/share/vim/vim74/plugin/tarPlugin.vim
+082.008  000.130  000.130: sourcing /usr/local/share/vim/vim74/plugin/tohtml.vim
+082.219  000.169  000.169: sourcing /usr/local/share/vim/vim74/plugin/vimballPlugin.vim
+082.499  000.227  000.227: sourcing /usr/local/share/vim/vim74/plugin/zipPlugin.vim
+082.924  004.189: loading plugins
+082.931  000.007: inits 3
+083.354  000.423: reading viminfo
+083.367  000.013: setting raw mode
+083.381  000.014: start termcap
+083.413  000.032: clearing screen
+083.977  000.156  000.156: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/init.vim
+084.559  000.139  000.139: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/parts.vim
+085.458  000.289  000.289: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions.vim
+085.745  000.070  000.070: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/quickfix.vim
+086.036  000.061  000.061: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/unite.vim
+086.357  000.064  000.064: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/netrw.vim
+086.740  000.130  000.130: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/hunks.vim
+087.152  000.152  000.152: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/branch.vim
+087.661  000.154  000.154: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/whitespace.vim
+088.447  000.437  000.437: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/tabline.vim
+090.864  000.119  000.119: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/section.vim
+091.381  000.206  000.206: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/highlighter.vim
+094.189  000.103  000.103: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/themes.vim
+094.503  000.667  000.564: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/themes/dark.vim
+094.961  000.183  000.183: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/builder.vim
+095.298  000.121  000.121: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/util.vim
+095.806  000.128  000.128: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/default.vim
+110.294  023.805: opening buffers
+115.380  000.302  000.302: sourcing /Users/luisvasconcellos/.vim/bundle/vim-gitgutter/autoload/gitgutter.vim
+115.825  000.215  000.215: sourcing /Users/luisvasconcellos/.vim/bundle/vim-gitgutter/autoload/gitgutter/utility.vim
+116.227  000.139  000.139: sourcing /Users/luisvasconcellos/.vim/bundle/vim-gitgutter/autoload/gitgutter/hunk.vim
+116.265  005.315: BufEnter autocommands
+116.270  000.005: editing files in windows
+122.697  006.427: VimEnter autocommands
+122.704  000.007: before starting main loop
+123.841  000.841  000.841: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/unite.vim
+124.202  001.366  000.525: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/unite/sources/history_yank.vim
+126.902  000.876  000.876: sourcing /Users/luisvasconcellos/.vim/bundle/unite.vim/autoload/vital/_unite/data/list.vim
+132.589  000.169  000.169: sourcing /Users/luisvasconcellos/.vim/bundle/vim-airline/autoload/airline/extensions/tabline/default.vim
+137.471  012.356: first screen update
+137.474  000.003: --- VIM STARTED ---
