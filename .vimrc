@@ -189,6 +189,7 @@ let g:YUNOcommit_after=50
 " Airline buffer tabs
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#excludes = ['vimfiler:explorer']
 
 " Resize all splits when the (tmux) panel is resized
 au VimResized * exe "normal! \<c-w>="
