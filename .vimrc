@@ -59,9 +59,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vasconcelloslf/vim-railscasts-theme'
 
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimfiler.vim'
-Plugin 'Shougo/neomru.vim'
 
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
@@ -74,13 +74,15 @@ Plugin 'vasconcelloslf/vim-interestingwords'
 
 Plugin 'tpope/vim-rsi'
 Plugin 'mattn/emmet-vim'
+Plugin 'deris/vim-shot-f'
 Plugin 'szw/vim-maximizer'
 Plugin 'bling/vim-airline'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'Raimondi/delimitMate'
+Plugin 'junegunn/limelight.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'deris/vim-shot-f'
+Plugin 'DanielFGray/DistractionFree.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -193,6 +195,11 @@ let g:vimfiler_execute_file_list = {}
 let g:vimfiler_execute_file_list['_'] = 'vim'
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_filename_format = ':.'
+
+" Distractions
+nnoremap <Leader>df <Esc>:DistractionsToggle<CR>
+let g:distraction_free#toggle_limelight = 1
+let g:distraction_free#toggle_tmux = 1
 
 nnoremap <C-f>     :VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<cr>
 nnoremap <C-t>     :Unite    -buffer-name=files    -start-insert -no-split file_rec/async:!<cr>
