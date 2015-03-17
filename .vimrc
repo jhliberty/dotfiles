@@ -65,7 +65,6 @@ Plugin 'Shougo/vimfiler.vim'
 
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-commentary'
 
 Plugin 'vasconcelloslf/vim-foldfocus'

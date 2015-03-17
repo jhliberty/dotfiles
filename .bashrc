@@ -32,15 +32,3 @@ export PATH=/usr/local/bin:$PATH
 
 # HEROKU TOOLBELT
 export PATH="/usr/local/heroku/bin:$PATH"
-
-# OPEN VIM WITH OBSESSION BY DEFAULT
-# UNLESS A FILE ARGUMENT WAS PASSED
-function vim() {
-  if test $# -gt 0; then
-    env vim "$@"
-  elif test -f Session.vim; then
-    env vim -S
-  else
-    env vim -c Obsession
-  fi
-}
