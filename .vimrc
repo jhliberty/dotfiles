@@ -187,6 +187,11 @@ let g:user_emmet_settings = {
 \  'indentation' : '  '
 \}
 
+" Distractions
+nnoremap <Leader>df <Esc>:DistractionsToggle<CR>
+let g:distraction_free#toggle_limelight = 1
+let g:distraction_free#toggle_tmux = 1
+
 " Unite & Vimfiler
 let g:vimfiler_safe_mode_by_default=0
 let g:vimfiler_as_default_explorer=1
@@ -194,11 +199,6 @@ let g:vimfiler_execute_file_list = {}
 let g:vimfiler_execute_file_list['_'] = 'vim'
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_file_mru_filename_format = ':.'
-
-" Distractions
-nnoremap <Leader>df <Esc>:DistractionsToggle<CR>
-let g:distraction_free#toggle_limelight = 1
-let g:distraction_free#toggle_tmux = 1
 
 nnoremap <C-f>     :VimFiler -buffer-name=explorer -split -simple -winwidth=35 -toggle -no-quit<cr>
 nnoremap <C-t>     :Unite    -buffer-name=files    -start-insert -no-split file_rec/async:!<cr>
@@ -213,6 +213,13 @@ call unite#custom#source('file_rec/async,grep', 'ignore_pattern', 'plugins/\|dat
 autocmd FileType vimfiler nmap <silent><buffer><expr> <CR> vimfiler#smart_cursor_map(
       \ "\<Plug>(vimfiler_expand_tree)",
       \ "\<Plug>(vimfiler_edit_file)")
+
+" Persistent undo
+try
+  set undodir=~/.vim_runtime/temp_dirs/undodir
+  set undofile
+catch
+endtry
 
 " ------------------------------------------------------------------------------
 " Search and Replace
