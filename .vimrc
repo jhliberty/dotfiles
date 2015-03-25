@@ -233,6 +233,7 @@ set matchpairs+=<:>
 set shortmess=aIoO
 set cmdheight=2
 set cursorline
+set cursorcolumn
 set showmatch
 set showcmd
 set hidden
