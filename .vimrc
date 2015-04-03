@@ -91,7 +91,8 @@ filetype plugin indent on    " required
 " ------------------------------------------------------------------------------
 
 " Because fuck you, thats why.
-noremap q :q<cr>
+noremap q :Bclose<cr>
+noremap Q :qall<cr>
 
 " Basic mappings
 noremap <leader>w :w<CR>
